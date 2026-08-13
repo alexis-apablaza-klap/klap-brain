@@ -1,0 +1,53 @@
+# Neo4j como PROYECCION de solo lectura de topology/topology.json + memory/.
+# No es el sistema de registro -- "klap graph build" lo reconstruye desde
+# los archivos. Nunca escribas directamente en el grafo via Browser/Cypher;
+# el proximo "klap graph build" lo sobreescribe.
+#
+# Endurecido respecto al ecosistema anterior:
+#   - Password SIEMPRE por variable de entorno, nunca hardcodeada (antes
+#     "neo4j/team-brain-2025" en claro en 13 archivos del repo).
+#   - Bind a 127.0.0.1, no 0.0.0.0 (antes expuesto a toda la LAN con
+#     password por defecto conocida).
+#   - APOC restringido a los procedimientos que la proyeccion realmente usa,
+#     no "apoc.*" completo.
+services:
+  neo4j:
+    image: neo4j:5.18-community
+    container_name: klap-brain-neo4j
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${NEO4J_HTTP_PORT:-7474}:7474"
+      - "127.0.0.1:${NEO4J_BOLT_PORT:-7687}:7687"
+    environment:
+      NEO4J_AUTH: "${NEO4J_USER:-neo4j}/${NEO4J_PASSWORD:?Define NEO4J_PASSWORD en .env o el entorno — sin default por diseno}"
+      NEO4J_PLUGINS: '["apoc"]'
+      NEO4J_dbms_security_procedures_unrestricted: "apoc.merge.*,apoc.create.*"
+      NEO4J_dbms_security_procedures_allowlist: "apoc.merge.*,apoc.create.*"
+      NEO4J_server_memory_heap_initial__size: 512m
+      NEO4J_server_memory_heap_max__size: 1G
+      NEO4J_server_memory_pagecache_size: 512m
+      NEO4J_dbms_logs_query_enabled: "INFO"
+      NEO4J_dbms_logs_query_threshold: "0"
+    volumes:
+      - klap-brain_neo4j_data:/data
+      - klap-brain_neo4j_logs:/logs
+      - klap-brain_neo4j_plugins:/plugins
+      - klap-brain_neo4j_import:/import
+    healthcheck:
+      test: ["CMD", "neo4j", "status"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 512M
+
+volumes:
+  klap-brain_neo4j_data:
+  klap-brain_neo4j_logs:
+  klap-brain_neo4j_plugins:
+  klap-brain_neo4j_import:

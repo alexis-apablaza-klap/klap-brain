@@ -1,0 +1,15 @@
+# El registry (GitHub Packages) es solo para distribuir el CODIGO del CLI,
+# no el contenido. memory/ y topology/ deben venir SIEMPRE de "git pull" en
+# el clon local (son la razon de ser de las revisiones en PR) -- publicarlos
+# en un paquete versionado los congelaria en el momento del publish y
+# quedarian obsoletos de inmediato. Ver README: instalar con "npm link"
+# desde el clon, no con una version fijada del registry.
+memory/
+topology/topology.json
+topology/MAP.md
+
+test/
+.github/
+.git/
+*.log
+.klap/

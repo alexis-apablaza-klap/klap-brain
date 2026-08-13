@@ -1,0 +1,34 @@
+{
+  "name": "@rodriguezyanez/klap-brain",
+  "version": "0.1.0",
+  "description": "Ecosistema de contexto compartido KLAP BYSF: topologia derivada, memoria funcional y skills.",
+  "bin": {
+    "klap": "bin/klap.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "ISC",
+  "author": "Equipo KLAP BYSF",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "scripts": {
+    "test": "node --test \"test/**/*.test.js\"",
+    "budget": "node src/ci/budget.js",
+    "validate": "node src/ci/validate.js",
+    "dedupe:check": "node src/ci/dedupe-check.js",
+    "versions:check": "node src/ci/versions-check.js",
+    "scan:check": "node src/ci/scan-check.js",
+    "ci": "npm run budget && npm run validate && npm run dedupe:check && npm run versions:check"
+  },
+  "dependencies": {},
+  "keywords": [
+    "klap",
+    "team-brain",
+    "topology",
+    "claude",
+    "mcp",
+    "cli"
+  ]
+}

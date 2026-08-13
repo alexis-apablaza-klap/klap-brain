@@ -1,0 +1,6205 @@
+{
+  "generatedAt": "2026-08-13T20:46:10.825Z",
+  "sources": [
+    {
+      "adapter": "spring-config-server",
+      "path": "../PROPERTIES/ms-central-config-server-repo",
+      "componentCount": 218
+    },
+    {
+      "adapter": "repo-scan",
+      "reposScanned": 7,
+      "reposSkipped": 8
+    }
+  ],
+  "components": [
+    {
+      "id": "bff-bysf-liqsvbo-administracion-tarifas-adquirencia",
+      "type": "bff",
+      "domain": "bysf",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "bff-bysf-liqsvbo-crud-reglas-tarifa",
+      "type": "bff",
+      "domain": "bysf",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "bff-bysf-liqsvbo-notificaciones",
+      "type": "bff",
+      "domain": "bysf",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local"
+      ],
+      "topics": {
+        "input": [
+          "bysf-liqsvbo-notificacion",
+          "bysf-liqsvbo-notificacion-input",
+          "notificaciones"
+        ],
+        "output": [
+          "bysf-liqsvbo-notificacion-output"
+        ],
+        "notification": [
+          "bysf-liqsvbo-notificacion"
+        ],
+        "dlq": [
+          "bysf-liqsvbo-notificacion-dlq",
+          "notificaciones-dlt"
+        ],
+        "other": []
+      },
+      "groupId": "group-bysf-liquidacion-svbo",
+      "database": {
+        "hasDatabase": true,
+        "schema": "backoffice_serv_fin"
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "bysf-fact-presentador-facturador",
+      "type": "bysf",
+      "domain": "fact",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [
+          "bysf-dlq-presentador-facturador"
+        ],
+        "other": [
+          "presentador-traspaso"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource.aurora",
+        "notificacion.sendgrid"
+      ]
+    },
+    {
+      "id": "cnsr-multi-smv-data-comercios",
+      "type": "cnsr",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "dev",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "app.kafka.schema.registry"
+      ]
+    },
+    {
+      "id": "cnsr-multi-smv-data-comercios-retry",
+      "type": "cnsr",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "dev",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "flow-code"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "app.kafka.schema.registry"
+      ]
+    },
+    {
+      "id": "lbd-sva-reporte-facturacion-anticipo",
+      "type": "lbd",
+      "domain": "sva",
+      "source": "lambda",
+      "manifest": "serverless.yml",
+      "declared": {
+        "service": "lbd-sva-reporte-facturacion-anticipo",
+        "runtime": "nodejs18.x",
+        "region": "us-east-2",
+        "httpEndpoints": [
+          {
+            "function": "mainFunction",
+            "method": "post",
+            "path": "main"
+          }
+        ]
+      },
+      "database": {
+        "hasDatabase": true,
+        "schema": null,
+        "engines": [
+          "postgresql (pg)"
+        ],
+        "confidence": "heuristic"
+      },
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "usesKafka": false,
+      "externalApis": [],
+      "externalApisConfidence": "heuristic",
+      "notes": []
+    },
+    {
+      "id": "lbd-sva-reporte-interaux-anticipo",
+      "type": "lbd",
+      "domain": "sva",
+      "source": "lambda",
+      "manifest": "serverless.yml",
+      "declared": {
+        "service": "lbd-sva-reporte-interaux-anticipo",
+        "runtime": "nodejs22.x",
+        "region": "us-east-2",
+        "httpEndpoints": []
+      },
+      "database": {
+        "hasDatabase": true,
+        "schema": null,
+        "engines": [
+          "postgresql (pg)"
+        ],
+        "confidence": "heuristic"
+      },
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "usesKafka": false,
+      "externalApis": [],
+      "externalApisConfidence": "heuristic",
+      "notes": []
+    },
+    {
+      "id": "lbd-sva-trx-summary-anticipo",
+      "type": "lbd",
+      "domain": "sva",
+      "source": "lambda",
+      "manifest": null,
+      "declared": {
+        "service": "lbd-sva-trx-summary-anticipo",
+        "runtime": null,
+        "region": null,
+        "httpEndpoints": []
+      },
+      "database": {
+        "hasDatabase": true,
+        "schema": null,
+        "engines": [
+          "postgresql (pg)"
+        ],
+        "confidence": "heuristic"
+      },
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "usesKafka": false,
+      "externalApis": [],
+      "externalApisConfidence": "heuristic",
+      "notes": [
+        "Sin serverless.yml/template.yaml — solo se aplico heuristica sobre el codigo fuente"
+      ]
+    },
+    {
+      "id": "mcf-central-sva-r2-admin-creditos",
+      "type": "mcf",
+      "domain": "central",
+      "source": "angular-mfe",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "verticaldesa.mcdesaqa.cl",
+        "api.vertical.multicaja.cl",
+        "verticalqa.mcdesaqa.cl"
+      ],
+      "externalApisConfidence": "declared",
+      "securityFindings": [
+        {
+          "type": "hardcoded-secret-literal",
+          "items": [
+            {
+              "key": "tokenR2Reportes",
+              "file": "environment.develop.ts"
+            },
+            {
+              "key": "tokenR2Reportes",
+              "file": "environment.master.ts"
+            },
+            {
+              "key": "tokenR2Reportes",
+              "file": "environment.qa.ts"
+            },
+            {
+              "key": "tokenR2Reportes",
+              "file": "environment.ts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mcf-central-sva-r2-nomina",
+      "type": "mcf",
+      "domain": "central",
+      "source": "angular-mfe",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "verticaldesa.mcdesaqa.cl",
+        "api.vertical.multicaja.cl",
+        "verticalqa.mcdesaqa.cl"
+      ],
+      "externalApisConfidence": "declared",
+      "securityFindings": [
+        {
+          "type": "hardcoded-secret-literal",
+          "items": [
+            {
+              "key": "r2ReportsToken",
+              "file": "environment.develop.ts"
+            },
+            {
+              "key": "r2ReportsToken",
+              "file": "environment.master.ts"
+            },
+            {
+              "key": "r2ReportsToken",
+              "file": "environment.qa.ts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mcf-central-sva-r2-reporte-creditos",
+      "type": "mcf",
+      "domain": "central",
+      "source": "angular-mfe",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "verticaldesa.mcdesaqa.cl",
+        "api.vertical.multicaja.cl",
+        "verticalqa.mcdesaqa.cl"
+      ],
+      "externalApisConfidence": "declared",
+      "securityFindings": [
+        {
+          "type": "hardcoded-secret-literal",
+          "items": [
+            {
+              "key": "tokenR2Reportes",
+              "file": "environment.develop.ts"
+            },
+            {
+              "key": "tokenR2Reportes",
+              "file": "environment.master.ts"
+            },
+            {
+              "key": "tokenR2Reportes",
+              "file": "environment.qa.ts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mcs-bysf-liqsvbo-api-gestion-retencion",
+      "type": "mcs",
+      "domain": "bysf",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [
+          "bysf-liqsvbo-orden-pago",
+          "bysf-liqsvbo-validacion-op"
+        ],
+        "output": [
+          "bysf-liqsvbo-retenciones"
+        ],
+        "notification": [
+          "bysf-liqsvbo-notificacion"
+        ],
+        "dlq": [
+          "dlq-bysf-liqsvbo-retenciones"
+        ],
+        "other": []
+      },
+      "groupId": "group-bysf-liquidacion-svbo",
+      "database": {
+        "hasDatabase": true,
+        "schema": "backoffice_serv_fin"
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-bysf-liqsvbo-api-pago-comercio",
+      "type": "mcs",
+      "domain": "bysf",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [
+          "bysf-liqsvbo-retenciones"
+        ],
+        "output": [
+          "bysf-liqsvbo-transfer",
+          "bysf-liqsvbo-notificacion"
+        ],
+        "notification": [],
+        "dlq": [
+          "dlq-bysf-liqsvbo-transfer",
+          "bysf-dlq-liqsvbo-transfer"
+        ],
+        "other": []
+      },
+      "groupId": "group-bysf-liquidacion-svbo",
+      "database": {
+        "hasDatabase": true,
+        "schema": "backoffice_serv_fin"
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-bysf-liqsvbo-calculo-tasa-intercambio",
+      "type": "mcs",
+      "domain": "bysf",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": "backoffice_serv_fin"
+      },
+      "externalApis": [
+        "spring.data.redis",
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-bysf-liqsvbo-crud-retencion-pago",
+      "type": "mcs",
+      "domain": "bysf",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": "backoffice_serv_fin"
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-bysf-liqsvbo-datos-cliente",
+      "type": "mcs",
+      "domain": "bysf",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "mcs-bysf-liqsvbo-genera-transfer",
+      "type": "mcs",
+      "domain": "bysf",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local"
+      ],
+      "topics": {
+        "input": [
+          "bysf-liqsvbo-transfer",
+          "bysf-liqsvbo-integracion-banco"
+        ],
+        "output": [
+          "bysf-liqsvbo-notificacion"
+        ],
+        "notification": [],
+        "dlq": [
+          "dlq-bysf-liqsvbo-transfer",
+          "dlq-bysf-liqsvbo-notificacion",
+          "dlq-bysf-liqsvbo-validacion-op"
+        ],
+        "other": []
+      },
+      "groupId": "group-bysf-liquidacion-svbo",
+      "database": {
+        "hasDatabase": true,
+        "schema": "backoffice_serv_fin"
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-bysf-liqsvbo-legado-obtiene-deuda",
+      "type": "mcs",
+      "domain": "bysf",
+      "source": "spring-config-server",
+      "envs": [
+        "dev"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-bysf-liqsvbo-legado-registra-deuda",
+      "type": "mcs",
+      "domain": "bysf",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-bysf-liqsvbo-productor-clearing-out",
+      "type": "mcs",
+      "domain": "bysf",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "bysf-liqsvbo-preliquidacion",
+          "bysf-liqsvbo-notificacion"
+        ]
+      },
+      "groupId": "group-bysf-liquidacion-svbo",
+      "database": {
+        "hasDatabase": true,
+        "schema": "backoffice_serv_fin"
+      },
+      "externalApis": [
+        "spring.datasource",
+        "exclusion.interchange"
+      ]
+    },
+    {
+      "id": "mcs-bysf-liqsvbo-regla-tarifa-crud",
+      "type": "mcs",
+      "domain": "bysf",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": "backoffice_serv_fin"
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-bysf-liqsvbo-reglas-transfer",
+      "type": "mcs",
+      "domain": "bysf",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "mcs-bysf-liqsvbo-saldo-clientes",
+      "type": "mcs",
+      "domain": "bysf",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [
+          "bysf-liqsvbo-validacion-op"
+        ],
+        "output": [
+          "bysf-liqsvbo-orden-pago"
+        ],
+        "notification": [
+          "bysf-liqsvbo-notificacion"
+        ],
+        "dlq": [
+          "dlq-bysf-liqsvbo-orden-pago"
+        ],
+        "other": []
+      },
+      "groupId": "group-bysf-liquidacion-svbo",
+      "database": {
+        "hasDatabase": true,
+        "schema": "backoffice_serv_fin"
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-bysf-liqsvbo-tarifa-comisiones",
+      "type": "mcs",
+      "domain": "bysf",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "mcs-bysf-liqsvbo-tipo-comercio-crud",
+      "type": "mcs",
+      "domain": "bysf",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "mcs-bysf-liqsvbo-validacion-tarifas",
+      "type": "mcs",
+      "domain": "bysf",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [
+          "bysf-liqsvbo-notificacion"
+        ],
+        "dlq": [
+          "dlq-bysf-liqsvbo-preliquidacion",
+          "bysf-liqsvbo-validation-dlt"
+        ],
+        "other": [
+          "bysf-liqsvbo-preliquidacion",
+          "bysf-liqsvbo-validacion-op"
+        ]
+      },
+      "groupId": "group-bysf-liquidacion-svbo",
+      "database": {
+        "hasDatabase": true,
+        "schema": "backoffice_serv_fin"
+      },
+      "externalApis": [
+        "spring.datasource",
+        "api.client"
+      ]
+    },
+    {
+      "id": "mcs-central-apm-pluxee-pin",
+      "type": "mcs",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "jdbc"
+      ]
+    },
+    {
+      "id": "mcs-central-bysf-autoconfig-activacion-pos",
+      "type": "mcs",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-central-bysf-autoconfig-asignar-terminal-bo",
+      "type": "mcs",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-central-bysf-autoconfig-consultas-bo",
+      "type": "mcs",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-central-bysf-autoconfig-crud-terminales",
+      "type": "mcs",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "production",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-central-bysf-autoconfig-despacho-kits",
+      "type": "mcs",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource",
+        "app.dispatch.xcash",
+        "app.dispatch.xcash.proxy"
+      ]
+    },
+    {
+      "id": "mcs-central-bysf-autoconfig-order-manager",
+      "type": "mcs",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [
+          "bysf-autoconfig-pos-notificacion"
+        ],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-central-bysf-autoconfig-terminales",
+      "type": "mcs",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "mcs-central-sva-batch-resumen-trxs",
+      "type": "mcs",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "mcs-central-sva-correo-pago-24-7",
+      "type": "mcs",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "bysf-liqsvbo-notificacion-email"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "mcs-central-sva-mantenedor-cuota-comercio",
+      "type": "mcs",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "mcs-multi-be-api-fonasa-bonos",
+      "type": "mcs",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-multi-bo-ms-bff-bysf-imed",
+      "type": "mcs",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "develop"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "mcs-multi-bysf-liqctacte-integracion-banco",
+      "type": "mcs",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [
+          "bysf-liqsvbo-integracion-banco"
+        ],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-multi-bysf-liqsvbo-gestor-reintentos",
+      "type": "mcs",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "develop"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": "backoffice_serv_fin"
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-multi-bysf-liqsvbo-migracion-tablon-aurora",
+      "type": "mcs",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": "backoffice_serv_fin"
+      },
+      "externalApis": []
+    },
+    {
+      "id": "mcs-multi-bysf-liqsvbo-productor-clearing-out-interchange",
+      "type": "mcs",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "bysf-liqsvbo-preliquidacion",
+          "bysf-liqsvbo-notificacion"
+        ]
+      },
+      "groupId": "group-bysf-liquidacion-svbo",
+      "database": {
+        "hasDatabase": true,
+        "schema": "backoffice_serv_fin"
+      },
+      "externalApis": [
+        "spring.datasource",
+        "exclusion.interchange"
+      ]
+    },
+    {
+      "id": "mcs-multi-bysf-liqsvbo-productor-clearing-out-multiservicio",
+      "type": "mcs",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "bysf-liqsvbo-preliquidacion",
+          "bysf-liqsvbo-notificacion"
+        ]
+      },
+      "groupId": "group-bysf-liquidacion-svbo",
+      "database": {
+        "hasDatabase": true,
+        "schema": "backoffice_serv_fin"
+      },
+      "externalApis": [
+        "spring.datasource",
+        "exclusion.interchange"
+      ]
+    },
+    {
+      "id": "mcs-multi-bysf-liqsvbo-resultado-proceso",
+      "type": "mcs",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local"
+      ],
+      "topics": {
+        "input": [
+          "bysf-liqsvbo-resultado-proceso"
+        ],
+        "output": [
+          "bysf-liqsvbo-notificacion"
+        ],
+        "notification": [],
+        "dlq": [
+          "dlq-bysf-liqsvbo-resultado-proceso"
+        ],
+        "other": []
+      },
+      "groupId": "group-bysf-liquidacion-svbo",
+      "database": {
+        "hasDatabase": true,
+        "schema": "backoffice_serv_fin"
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-multi-bysf-pos-datos-cliente",
+      "type": "mcs",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "mcs-multi-sop-af-ayc-validacion-kyc",
+      "type": "mcs",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [
+          "clien-afilautocon-valdacion-kyc"
+        ],
+        "output": [],
+        "notification": [],
+        "dlq": [
+          "dlq-clien-afilautocon-validacion-kyc"
+        ],
+        "other": []
+      },
+      "groupId": "group-client-autoconfiguracion",
+      "database": {
+        "hasDatabase": true,
+        "schema": "verticales"
+      },
+      "externalApis": [
+        "spring.datasource",
+        "validacionkyc.api.bff.webdox",
+        "validacionkyc.api.fresh"
+      ]
+    },
+    {
+      "id": "mcs-vertical-appk-enrollment-worker",
+      "type": "mcs",
+      "domain": "vertical",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [
+          "bysf-autoconfig-pos-notificacion"
+        ],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "appk-notification-integration"
+      ]
+    },
+    {
+      "id": "monoapp-multi-smv-generador-svap-amex",
+      "type": "monoapp",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "dev"
+      ],
+      "topics": {
+        "input": [],
+        "output": [
+          "smv-consumer-data-amex-retry"
+        ],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "smv-consumer-data-amex-retry",
+          "smv-consumer-amex-dql"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "monoapp-multi-smv-generador-svap-comercio",
+      "type": "monoapp",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "dev",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [
+          "smv-consumer-data-comercio-retry"
+        ],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "smv-consumer-data-comercio-retry",
+          "smv-consumer-master-comercio-dql"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "monoapp-multi-smv-generador-svap-fin700",
+      "type": "monoapp",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "dev",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": "group-smv-data-comercios-fin700",
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "monoapp-multi-smv-generador-svap-margen-adquirente",
+      "type": "monoapp",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "dev"
+      ],
+      "topics": {
+        "input": [],
+        "output": [
+          "smv-consumer-data-margen-adquirente-retry"
+        ],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "smv-consumer-data-margen-adquirente-retry",
+          "smv-consumer-master-margen-adquirente-dql"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "monoapp-multi-smv-generador-svap-sucursal",
+      "type": "monoapp",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "dev",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [
+          "smv-consumer-data-sucursal-retry"
+        ],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "smv-consumer-data-sucursal-retry",
+          "smv-consumer-master-sucursal-dql"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "monoapp-multi-smv-generador-svap-tarifa-estandar",
+      "type": "monoapp",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "dev"
+      ],
+      "topics": {
+        "input": [],
+        "output": [
+          "smv-consumer-data-tarifa-estandar-retry"
+        ],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "smv-consumer-data-tarifa-estandar-retry",
+          "smv-consumer-master-tarifa-estandar-dql"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "monoapp-multi-smv-generador-svap-tarifas",
+      "type": "monoapp",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "dev"
+      ],
+      "topics": {
+        "input": [],
+        "output": [
+          "smv-consumer-data-tarifas-retry"
+        ],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "smv-consumer-data-tarifas-retry",
+          "smv-consumer-master-tarifas-dql"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "monoapp-multi-smv-generador-svap-terminal",
+      "type": "monoapp",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "dev",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [
+          "smv-consumer-data-terminal-retry"
+        ],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "smv-consumer-data-terminal-retry",
+          "smv-consumer-master-terminal-dql"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "monoapp-multi-smv-migracion-masivo-amex",
+      "type": "monoapp",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "dev"
+      ],
+      "topics": {
+        "input": [
+          "smv-consumer-data-se-number-amex-in"
+        ],
+        "output": [
+          "smv-consumer-data-se-number-amex-out"
+        ],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": "group-smv-consumer-se-number-amex-in",
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "monoapp-multi-smv-migracion-masivo-comercio",
+      "type": "monoapp",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "dev"
+      ],
+      "topics": {
+        "input": [
+          "smv-consumer-data-se-number-amex-in"
+        ],
+        "output": [
+          "smv-consumer-data-se-number-amex-out"
+        ],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": "group-smv-consumer-se-number-amex-in",
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "monoapp-multi-smv-migracion-masivo-sucursal",
+      "type": "monoapp",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "dev"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "monoapp-multi-smv-migracion-masivo-tarifas",
+      "type": "monoapp",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "dev"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "monoapp-multi-smv-migracion-masivo-terminal",
+      "type": "monoapp",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "dev"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "monoapp-multi-smv-svap-generate",
+      "type": "monoapp",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "dev",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "klap.sftp"
+      ]
+    },
+    {
+      "id": "monoapp-multi-smv-svxp-generate-divisas",
+      "type": "monoapp",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "dev",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "klap.divisas"
+      ]
+    },
+    {
+      "id": "ms-central-adq-edap-preliquidacion",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-af-ayc-comercios",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-af-ayc-commerce-validator",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-af-ayc-common-data",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-af-ayc-consumer-integracion",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [
+          "sop-af-ayc-volcado-centrales-integracion"
+        ],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ms-multicaja-integrations.ayc.comercio.registro",
+        "ms-multicaja-integrations.ayc.comercio",
+        "ms-multicaja-integrations.ayc.common",
+        "ms-multicaja-integrations.backoffice.autoconfiguracion",
+        "ms-central-bomc-proxy-comunication",
+        "ms-multicaja-integrations",
+        "checkout.ecommerce",
+        "smartvista.api"
+      ]
+    },
+    {
+      "id": "ms-central-af-ayc-datos-restringidos",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-af-ayc-registro-comercio",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-af-ayc-smartvista-migration",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "smart-vista-svap"
+      ]
+    },
+    {
+      "id": "ms-central-af-ayc-sucursales",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-af-ayc-task",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "freshSalesCrm"
+      ]
+    },
+    {
+      "id": "ms-central-af-ayc-task-volcado",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ms-multicaja-integrations",
+        "ms-multicaja-integrations.ayc.common",
+        "ms-multicaja-integrations.ayc.comercio",
+        "ms-multicaja-integrations.backoffice.autoconfiguracion",
+        "config.ms-multicaja-integrations-ecommerce",
+        "smartvista.api"
+      ]
+    },
+    {
+      "id": "ms-central-ali-liq-transactions-petrobras",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "config.sftp"
+      ]
+    },
+    {
+      "id": "ms-central-ali-pos-sodexo-recharge-online",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-ali-qr-receiver-mercadopago",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-ali-qr-third-party-receiver-redpay-wallet",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-ali-qr-third-party-register",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-ali-sodexo-balance-manager",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-ali-sodexo-balance-manager-sodexo",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-ali-sodexo-golden-rules",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "switch.client.switch"
+      ]
+    },
+    {
+      "id": "ms-central-ali-sodexo-golden-rules-sodexo",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "switch.client.switch"
+      ]
+    },
+    {
+      "id": "ms-central-alr-pos-orchestrator-encryptation-key",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ms.client.auth.ldap",
+        "ms.client.auth"
+      ]
+    },
+    {
+      "id": "ms-central-alr-pos-orchestrator-encryptation-key-petro",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ms.client.auth.ldap",
+        "ms.client.auth"
+      ]
+    },
+    {
+      "id": "ms-central-alr-qr-receiver-fpay-wallet",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-apm-edenred-daily-report",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "db_mc_tlog",
+        "db_mc_tlog_replica",
+        "db_emisores_alimentacion",
+        "sftp_windows"
+      ]
+    },
+    {
+      "id": "ms-central-apm-pluxee",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "jdbc"
+      ]
+    },
+    {
+      "id": "ms-central-apm-switch-edenred-connector",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "local",
+        "master"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "connector.api.ionix.v1",
+        "connector.api.ionix.v2"
+      ]
+    },
+    {
+      "id": "ms-central-atc-wpr-abonos",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-atc-wpr-auditoria",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-atc-wpr-boleta-electronica",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "eitmc_ebill"
+      ]
+    },
+    {
+      "id": "ms-central-atc-wpr-comercio-slc",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-atc-wpr-comercio-transacciones",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "api-transacciones-pci"
+      ]
+    },
+    {
+      "id": "ms-central-atc-wpr-comercios-procesos",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "sendgrid.email.api"
+      ]
+    },
+    {
+      "id": "ms-central-atc-wpr-comercios-sucursales",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-atc-wpr-comercios-terminales",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-atc-wpr-cuotas-comercio",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "eitmc_ebill"
+      ]
+    },
+    {
+      "id": "ms-central-atc-wpr-datos-comercio",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ms-multicaja-atc-wpr-comercios-terminales",
+        "ms-central-atc-wpr-comercios-terminales",
+        "ms-central-atc-wpr-auditoria"
+      ]
+    },
+    {
+      "id": "ms-central-atc-wpr-firma-documentos",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ms-central-atc-wpr-comercios-terminales",
+        "api.webdox",
+        "api.bo"
+      ]
+    },
+    {
+      "id": "ms-central-atc-wpr-liquidaciones",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ms-consolidado-mensual"
+      ]
+    },
+    {
+      "id": "ms-central-atc-wpr-liquidaciones-consolidado-mensual",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "local"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-atc-wpr-scheduled-task",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-atc-wpr-tickets",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "api-fresh-desk",
+        "ms-central-atc-wpr-auditoria"
+      ]
+    },
+    {
+      "id": "ms-central-atc-wpr-transacciones-multiservicios",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-atc-wpr-usuarios-roles",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-atc-wprp-bill-payment",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "api.pago.cuentas"
+      ]
+    },
+    {
+      "id": "ms-central-atc-wprp-bip-ftp",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "sonda.ftp"
+      ]
+    },
+    {
+      "id": "ms-central-atc-wprp-conciliaciones",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "config.sftp",
+        "sendgrid.email.api"
+      ]
+    },
+    {
+      "id": "ms-central-bff-bysf-bo-menu",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "ms-central-bomc-actualizacion-comercios-scheduled",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "jsch.app.remote"
+      ]
+    },
+    {
+      "id": "ms-central-bomc-api-vigencia-rut",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.registro-civil"
+      ]
+    },
+    {
+      "id": "ms-central-bomc-asignacion-autoconfiguracion",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource.write",
+        "spring.datasource.read"
+      ]
+    },
+    {
+      "id": "ms-central-bomc-condiciones-comerciales",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-bomc-creacion-terminales",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource.write",
+        "spring.datasource.read"
+      ]
+    },
+    {
+      "id": "ms-central-bomc-genera-slc-batch",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-bomc-limites-anticipo",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-bomc-proxy-comunicacion",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource.write",
+        "spring.datasource.read",
+        "terminales.api"
+      ]
+    },
+    {
+      "id": "ms-central-bomc-reporte-autoconfiguracion",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "email.api"
+      ]
+    },
+    {
+      "id": "ms-central-bomc-seguridad",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-bysf-cierre-de-dia",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource.write",
+        "spring.datasource.read"
+      ]
+    },
+    {
+      "id": "ms-central-bysf-envio-clearing",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "svm-consumer-cuota-ccomercio",
+          "bysf-liqsvbo-transfer"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource.write",
+        "spring.datasource.read"
+      ]
+    },
+    {
+      "id": "ms-central-cdb-apf-prefacturado",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-cdb-api-clientes-be",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-cdb-api-consultas-boletas",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "local"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "ms-central-cdb-api-generacion-doc-digitales-be",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-cdb-api-juegos-azar",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-cdb-api-recepcion-boletas",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource",
+        "ms-central-cdb-api-clientes-be"
+      ]
+    },
+    {
+      "id": "ms-central-cdb-api-reporte-recargas-mach",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ftp"
+      ]
+    },
+    {
+      "id": "ms-central-cdb-be-api-carga-masiva-boletas",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-cdb-be-api-conciliacion-klap-msv",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource",
+        "ms-central-cdb-be-mail-manager"
+      ]
+    },
+    {
+      "id": "ms-central-cdb-be-api-envio",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "ms-central-cdb-be-api-envio-aws",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "local"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "ms-central-cdb-be-api-folios",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "ms-central-cdb-be-api-folios-aws",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "local"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "ms-central-cdb-be-api-multiservicios-pos",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "ms-central-cdb-be-consumer-tbls-aws-op",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "local"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "be_sii_tbl_boletas_electronica"
+        ]
+      },
+      "groupId": "be-sii-consumer-group",
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "ms-central-cdb-be-crontab-shell",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "be.validation.message"
+      ]
+    },
+    {
+      "id": "ms-central-cdb-be-integracion-web",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource",
+        "ms-vertical-cdb-be-proxy-habilitacionbe-webprivada",
+        "ms-central-cdb-be-mail-manager"
+      ]
+    },
+    {
+      "id": "ms-central-cdb-be-mail-manager",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "sendgrid.email.api"
+      ]
+    },
+    {
+      "id": "ms-central-cdb-be-producer-tbls-aws-op",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "local"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "be_sii_tbl_boletas_electronica"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "ms-central-cdb-be-runner",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "api.crontabshell"
+      ]
+    },
+    {
+      "id": "ms-central-cdb-be-tracking",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-cdb-be-venta-digital",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "sii.cumplimiento.represent",
+        "sii.postulacion.comercio",
+        "sii.valida.credencial",
+        "sii.visto.bueno",
+        "klap.registra.error",
+        "spring.datasource",
+        "spring.mail"
+      ]
+    },
+    {
+      "id": "ms-central-cdb-cc-comercios",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "ms-central-cdb-cc-t2p-devices",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-cdb-pdc-conciliacion",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-cdb-sp-payment-soap",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "ms-central-edenred-button-pay",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-eitmc-bill-payment",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "switch.legado",
+        "common.fx",
+        "swagger.contact.website",
+        "endpoint.agreements",
+        "endpoint.debts",
+        "endpoint.payments",
+        "endpoint.get.payments.by.debt",
+        "endpoint.get.payments.by.payment",
+        "endpoint.get.payments.by.reference",
+        "endpoint.get.payments.by.platform",
+        "endpoint.get.payments.by.dates"
+      ]
+    },
+    {
+      "id": "ms-central-eitmc-bip-recharge",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-eitmc-common-fx",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-eitmc-rectify-trx",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-eitmc-switch-legado",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-eitmc-terminal-management",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-adm-cuotas",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "app.presentacion.cuota"
+      ]
+    },
+    {
+      "id": "ms-central-fasf-adm-cuotas-aud",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "app.presentacion.cuota"
+      ]
+    },
+    {
+      "id": "ms-central-fasf-bo-altabaja-servicios",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-calculos-md",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-completa-data-registro-batch",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-consumidor-cuotas",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-consumidor-cuotas-aud",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-consumidor-deudas",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "sva-deudas-anticipo"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-extrac-trx-madre",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-extrac-trx-madre-aud",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-genera-liqui",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-genera-liqui-batch",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-genera-pos-comercio",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-presenta-cc-clearing",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "svm-consumer-cuota-ccomercio"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "app.kafka.schema.registry"
+      ]
+    },
+    {
+      "id": "ms-central-fasf-presenta-cc-clearing-mastercard",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "svm-consumer-cuota-ccomercio"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "app.kafka.schema.registry"
+      ]
+    },
+    {
+      "id": "ms-central-fasf-presenta-cc-clearing-visa",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "svm-consumer-cuota-ccomercio"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "app.kafka.schema.registry"
+      ]
+    },
+    {
+      "id": "ms-central-fasf-proceso-facturacion-bash",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-proceso-facturacion-orquestador",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-proceso-facturacion-tarea-fact",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-proceso-facturacion-validacion",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-r2-auditoria",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-r2-comercio",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ms-parametros"
+      ]
+    },
+    {
+      "id": "ms-central-fasf-r2-correos",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-r2-credito",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-r2-enviotrx",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ms-token",
+        "ms-parametros",
+        "ms-r2"
+      ]
+    },
+    {
+      "id": "ms-central-fasf-r2-enviotrx-potencial",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ms-token",
+        "ms-r2"
+      ]
+    },
+    {
+      "id": "ms-central-fasf-r2-orquestador",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-r2-pagos-externos",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-r2-parametros",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-r2-regla-deudor",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ms-comercio",
+        "ms-parametros"
+      ]
+    },
+    {
+      "id": "ms-central-fasf-r2-regla-monto",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ms-comercio",
+        "ms-parametros"
+      ]
+    },
+    {
+      "id": "ms-central-fasf-r2-reportes",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ms-parametros"
+      ]
+    },
+    {
+      "id": "ms-central-fasf-r2-retencion-mc",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ms-token",
+        "ms-r2"
+      ]
+    },
+    {
+      "id": "ms-central-fasf-r2-retencion-r2",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-fasf-r2-token",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ms-comercio"
+      ]
+    },
+    {
+      "id": "ms-central-fasf-r2-validador-regla",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ms-credito",
+        "ms-deudor",
+        "ms-monto"
+      ]
+    },
+    {
+      "id": "ms-central-gcu-jdabo-backend",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource",
+        "lottos.api"
+      ]
+    },
+    {
+      "id": "ms-central-gcu-pccqm-branch-merchant-qr",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-gcu-pdpr-pagopremio",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "spring.datasource",
+        "lottos.api"
+      ]
+    },
+    {
+      "id": "ms-central-pad-pdp-terminal-cuotas-comercio",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-ret-cuota-comercio",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-sal-anulaciones-parciales-comercio",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-sal-klap-merchant",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ms-login",
+        "spring.datasource"
+      ]
+    },
+    {
+      "id": "ms-central-sal-pos-imed",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "ms.client.auth"
+      ]
+    },
+    {
+      "id": "ms-central-sal-pos-pavs-pago-fonasa",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-sal-sender-switch",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-sop-af-planes-alimentacion",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-sop-af-proveedores-tecnologicos",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-sva-anticipo-calculos",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [
+          "sva-calculo-anticipo"
+        ],
+        "output": [
+          "sva-transferencia-anticipo"
+        ],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-sva-anticipo-limites",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-sva-anticipo-listas",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [
+          "sva-inicio-anticipo"
+        ],
+        "output": [
+          "sva-calculo-anticipo"
+        ],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-sva-anticipo-listas-develop-replica",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-sva-anticipo-listas-qa-replica",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-sva-anticipo-on-demand",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "sva-inicio-anticipo",
+          "sva-fin-anticipo-ondemand",
+          "adqh-block-branch-refunds"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "websocket"
+      ]
+    },
+    {
+      "id": "ms-central-sva-anticipo-on-demand-develop-replica",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-sva-anticipo-on-demand-qa-replica",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-sva-anticipo-ondemand",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-ecs",
+      "envs": [
+        "default"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "websocket"
+      ],
+      "notes": [
+        "Delega en config-server compartido pero declara topologia propia adicional — verificar cual es la fuente real"
+      ]
+    },
+    {
+      "id": "ms-central-sva-anticipo-programado",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "sva-inicio-anticipo",
+          "sva-fin-anticipo-programado"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-sva-anticipo-reportes",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-sva-anticipo-transferencias",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "sva-transferencia-anticipo",
+          "sva-fin-anticipo-programado",
+          "sva-fin-anticipo-ondemand",
+          "sva-deudas-anticipo"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "itau.api"
+      ]
+    },
+    {
+      "id": "ms-central-sva-consultas-cuota-comercio",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-sva-consumer-trxs-summary",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "preliquidacion"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-switch-boletaelectronicareporteestadorequisitos",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": [
+        "klap.ftp",
+        "spring.mail"
+      ]
+    },
+    {
+      "id": "ms-central-wliq-bff-consolidado-liquidaciones",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-central-wliq-settlement-syn-api",
+      "type": "ms",
+      "domain": "central",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "ms-vertical-appk-synchronize-keycloak-publish",
+      "type": "ms",
+      "domain": "vertical",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "ms-keycloak-integration"
+      ]
+    },
+    {
+      "id": "ms-vertical-appk-synchronize-keycloak-subscriber",
+      "type": "ms",
+      "domain": "vertical",
+      "source": "spring-config-server",
+      "envs": [
+        "default",
+        "develop",
+        "local",
+        "master",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": false,
+        "schema": null
+      },
+      "externalApis": [
+        "ms-keycloak-integration"
+      ]
+    },
+    {
+      "id": "ms-vertical-atc-wpr-medical-voucher-imed",
+      "type": "ms",
+      "domain": "vertical",
+      "source": "spring-config-server",
+      "envs": [
+        "develop"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": []
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    },
+    {
+      "id": "srv-multi-smv-mantencion-comercio",
+      "type": "srv",
+      "domain": "multi",
+      "source": "spring-config-server",
+      "envs": [
+        "dev",
+        "qa"
+      ],
+      "topics": {
+        "input": [],
+        "output": [],
+        "notification": [],
+        "dlq": [],
+        "other": [
+          "smv-consumer-data-amex",
+          "smv-consumer-data-margen-adquirente",
+          "smv-consumer-data-tarifas"
+        ]
+      },
+      "groupId": null,
+      "database": {
+        "hasDatabase": true,
+        "schema": null
+      },
+      "externalApis": []
+    }
+  ]
+}

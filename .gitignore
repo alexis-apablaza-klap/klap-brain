@@ -1,0 +1,10 @@
+node_modules/
+*.log
+.env
+.env.*
+
+# Estado local, no del repo
+.klap/
+
+# Salida de klap graph build / debug local
+*.tmp.json

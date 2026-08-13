@@ -1,0 +1,35 @@
+# Unico archivo de topologia escrito a mano. Todo lo demas (topology.json)
+# se deriva con `klap scan`. Los patrones son globs simples (* y ?) contra
+# el id de componente que produce cada adaptador -- agregar un componente
+# nuevo a un producto existente normalmente NO requiere tocar este archivo,
+# solo que su nombre calce con el patron ya declarado.
+#
+# phase (de CLAUDE.md del workspace): Kickoff -> Fase 1 -> Mantencion
+
+products:
+  - id: abono-ya
+    name: "Abono Ya"
+    description: "Pago adelantado al comercio de las ventas del dia, sin esperar el proceso de pago normal (payout acceleration)."
+    phase: "Fase 1"
+    componentPatterns:
+      - "*anticipo*"
+
+  - id: impulso-klap
+    name: "Impulso Klap"
+    description: "Credito otorgado por R2 al comercio en base a su historial de ventas, pagado dia a dia via retenciones sobre los pagos de Klap."
+    phase: "Mantencion"
+    componentPatterns:
+      - "*-r2-*"
+
+  - id: cuota-comercio
+    name: "Cuota Comercio"
+    description: "Soluciones de pago en cuotas para el comercio."
+    phase: "Mantencion"
+    componentPatterns:
+      - "*cuota-comercio*"
+
+  - id: vouchering-itau
+    name: "Vouchering Itau"
+    description: "Cuarto proyecto del equipo, en definicion."
+    phase: "Kickoff"
+    componentPatterns: []
