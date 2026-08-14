@@ -58,6 +58,30 @@ lo que vale la pena mover.
 - `/auditoria` y `web-artifacts-builder` — en `knowledge/auditoria/` y
   `knowledge/web-artifacts-builder/`, con el pre-flight de CVE apuntando a
   `klap cve-update` (mismo comando, ahora Node puro).
+- **`kafka-implement`** (nunca evaluado en la migración inicial, 44 KB) —
+  fundido en `knowledge/kafka/` y `knowledge/testing/references/kafka.md`
+  sin duplicar lo ya cubierto; sus 7 conflictos de firma con `config.md`/
+  `listener.md` se resolvieron a favor de las convenciones ya establecidas
+  (base abstracta, `DeadLetterPublishingRecoverer`, DLQ con mensaje
+  original). Trajo también el código completo de la clase base
+  `KafkaConfig`, antes solo citada y nunca mostrada.
+- **`kafka-audit`** — nueva skill en `knowledge/kafka-audit/`, reescrita
+  contra el estándar real de este repo (no contra `kafka-implement`, que
+  no existe aquí) y con la taxonomía de severidad alineada a
+  `auditoria/references/veredicto.md`.
+- **`CATI` + `RDC` + `HU Jira`** — nuevo bloque `knowledge/gobierno/`
+  (pipeline documental HU→CATI→RDC, distinto de las 5 fases de código de
+  `sdd`). De paso se corrigió un bug real en `generate-cati.js`: nunca leía
+  `d.diagrams`, así que el placeholder de diagrama se dibujaba siempre
+  aunque el JSON trajera una imagen real.
+- **`code-review-expert`** — migrado como skill delgada que referencia
+  `klap-standard`/`testing` en vez de repetir reglas; el original tenía 4
+  contradicciones con decisiones ya resueltas (cobertura 90% vs 95%, ORM
+  permitido, Testcontainers/WireMock vs MockWebServer, sugería Redis).
+- **`release-publish`** — reescrito para el scope/repo de klap-brain, con
+  el patrón HTTPS+token+background documentado como primer punto de
+  troubleshooting (Git Credential Manager cuelga `git push`/`fetch` sin
+  error en este remoto si no se embebe el token).
 
 ## Cómo migrar tu instalación
 
@@ -72,6 +96,9 @@ klap migrate --export <ruta-a-tu-export.json>
 # 3. Limpiar los artefactos legacy de ~/.claude (dry-run primero)
 klap migrate --clean-legacy          # solo lista qué se borraría
 klap migrate --clean-legacy --yes    # confirma el borrado
+# limpia ~/.claude/skills/*.md sueltos, ~/.claude/commands/ completo
+# (klap-brain no instala nada ahi -- es 100% huella del ecosistema anterior)
+# y los workflows muertos (_v1, simulacion_*)
 
 # 4. Instalar el contenido nuevo
 klap install
