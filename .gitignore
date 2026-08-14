@@ -3,6 +3,9 @@ node_modules/
 .env
 .env.*
 
+# Token de GitHub Packages -- nunca commitear (ver knowledge/release-publish/)
+.npmrc
+
 # Estado local, no del repo
 .klap/
 

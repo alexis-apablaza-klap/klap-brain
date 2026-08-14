@@ -72,8 +72,8 @@ aqui.
 
 ## PASO 4 — Estandar KLAP por stack
 
-Reutiliza las skills ya instaladas (`code-review-expert`, `sdd-checklist`,
-`defectos-tipicos-checklist`, `kafka-audit` si aplica) — el detalle de que revisar
+Reutiliza las skills ya instaladas (`code-review-expert`, `../sdd/references/checklist.md`,
+`../sdd/references/defectos-tipicos.md`, `kafka-audit` si aplica) — el detalle de que revisar
 por stack (Java, Lambda, API REST, Angular) esta en `references/estandar-por-stack.md`.
 No se duplican aqui reglas ya cubiertas por `klap-standard`.
 

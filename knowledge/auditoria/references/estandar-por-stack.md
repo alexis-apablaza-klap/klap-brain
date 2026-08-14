@@ -7,13 +7,13 @@ skills ya instaladas — no dupliques criterios que ya viven en otro skill.
 
 - `code-review-expert` — arquitectura, SOLID, manejo de errores, performance,
   observabilidad.
-- `sdd-checklist` + `knowledge/klap-standard/references/naming.md`,
+- `../../sdd/references/checklist.md` + `knowledge/klap-standard/references/naming.md`,
   `reglas-do.md`, `reglas-dont.md` — convenciones de nombre, JavaDoc, JdbcTemplate
   (nunca JPA), queries en `ConstantsQuery`, paginacion cursor-based, cobertura
   minima. No repitas esas reglas aqui: cita el hallazgo contra el archivo.
-- `defectos-tipicos-checklist` — 6 categorias: duplicados, nulls, validacion de
-  inputs, edge cases (DLQ/retry/alertas), trazabilidad (idProceso + codigoSucursal),
-  control de acceso (OWASP A01).
+- `../../sdd/references/defectos-tipicos.md` — 6 categorias: duplicados, nulls,
+  validacion de inputs, edge cases (DLQ/retry/alertas), trazabilidad
+  (idProceso + codigoSucursal), control de acceso (OWASP A01).
 - `kafka-audit` — **solo si el proyecto usa Kafka** (hay `@KafkaListener`/
   `KafkaTemplate`); reglas Kafka especificas ya estan en
   `knowledge/klap-standard/references/reglas-do.md` y `reglas-dont.md`.

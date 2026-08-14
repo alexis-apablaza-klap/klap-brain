@@ -72,7 +72,7 @@ Genera el archivo `auditoria-{nombre-proyecto}-{YYYY-MM-DD}.md` con este formato
 ```
 
 No apliques correcciones. Si el dev pide arreglar, indicale la skill correspondiente
-(`code-review-expert`, `kafka-audit`, `sdd-microservice`, etc.) por cada bloqueante.
+(`code-review-expert`, `kafka-audit`, `../../sdd/`, etc.) por cada bloqueante.
 
 ### Datos estructurados (fuente del dashboard)
 
