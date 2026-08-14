@@ -38,6 +38,15 @@ function run(_args) {
     legacySkills.length ? `${legacySkills.length} .md suelto(s) (formato viejo, no descubrible) — correr "klap migrate --clean-legacy"` : null,
   );
 
+  const legacyCommands = fs.existsSync(paths.CLAUDE_COMMANDS)
+    ? fs.readdirSync(paths.CLAUDE_COMMANDS)
+    : [];
+  check(
+    '~/.claude/commands/ sin huella del ecosistema anterior',
+    legacyCommands.length === 0,
+    legacyCommands.length ? `${legacyCommands.length} entrada(s) (klap-brain no instala nada ahi) — correr "klap migrate --clean-legacy"` : null,
+  );
+
   console.log(issues === 0 ? '\nTodo en orden.' : `\n${issues} item(s) pendiente(s) — ver arriba.`);
   return !hardFail;
 }

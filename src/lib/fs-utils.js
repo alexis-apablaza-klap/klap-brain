@@ -9,7 +9,8 @@ function ensureDir(dir) {
 
 function readJson(file, fallback = null) {
   if (!fs.existsSync(file)) return fallback;
-  return JSON.parse(fs.readFileSync(file, 'utf8'));
+  const text = fs.readFileSync(file, 'utf8').replace(/^﻿/, '');
+  return JSON.parse(text);
 }
 
 function writeJson(file, data) {

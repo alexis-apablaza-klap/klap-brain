@@ -13,10 +13,12 @@
  *    skills versionados, no como memoria dinamica.
  *
  * 2) --clean-legacy limpia ~/.claude/skills/*.md sueltos (formato viejo,
- *    no descubrible por Claude Code) y los artefactos muertos de
- *    ~/.claude/workflows/ (_v1, simulacion_*). Dry-run por defecto: solo
- *    con --yes borra de verdad, porque toca ~/.claude compartido por todos
- *    los proyectos del dev, no solo este repo.
+ *    no descubrible por Claude Code), ~/.claude/commands/ completo (klap-brain
+ *    no instala nada ahi -- ese directorio es integramente la huella del
+ *    ecosistema anterior, que copiaba commands/+workflows/ recursivamente) y
+ *    los artefactos muertos de ~/.claude/workflows/ (_v1, simulacion_*).
+ *    Dry-run por defecto: solo con --yes borra de verdad, porque toca
+ *    ~/.claude compartido por todos los proyectos del dev, no solo este repo.
  */
 
 const fs = require('fs');
@@ -90,12 +92,18 @@ function findLegacyClaudeArtifacts() {
       .filter((f) => f.endsWith('.md'))
       .map((f) => path.join(paths.CLAUDE_SKILLS, f))
     : [];
+  // klap-brain nunca escribe en ~/.claude/commands/ (install.js solo toca
+  // CLAUDE_SKILLS + CLAUDE_MD) -- todo lo que hay ahi es huella del
+  // ecosistema anterior, se limpia completo.
+  const legacyCommands = fs.existsSync(paths.CLAUDE_COMMANDS)
+    ? fs.readdirSync(paths.CLAUDE_COMMANDS).map((f) => path.join(paths.CLAUDE_COMMANDS, f))
+    : [];
   const deadWorkflows = fs.existsSync(paths.CLAUDE_WORKFLOWS)
     ? fs.readdirSync(paths.CLAUDE_WORKFLOWS)
       .filter((f) => /_v1\.|^simulacion_/i.test(f))
       .map((f) => path.join(paths.CLAUDE_WORKFLOWS, f))
     : [];
-  return [...flatSkills, ...deadWorkflows];
+  return [...flatSkills, ...legacyCommands, ...deadWorkflows];
 }
 
 function run(args) {
@@ -120,13 +128,13 @@ function run(args) {
   if (cleanLegacy) {
     const artifacts = findLegacyClaudeArtifacts();
     if (!artifacts.length) {
-      console.log('\nSin artefactos legacy en ~/.claude/skills o ~/.claude/workflows.');
+      console.log('\nSin artefactos legacy en ~/.claude/skills, ~/.claude/commands o ~/.claude/workflows.');
     } else if (!confirmed) {
-      console.log(`\n[DRY-RUN] ${artifacts.length} archivo(s) se eliminarian de ~/.claude (agregar --yes para confirmar):`);
+      console.log(`\n[DRY-RUN] ${artifacts.length} archivo(s)/carpeta(s) se eliminarian de ~/.claude (agregar --yes para confirmar):`);
       for (const a of artifacts) console.log(`  - ${a}`);
     } else {
       for (const a of artifacts) {
-        fs.rmSync(a, { force: true });
+        fs.rmSync(a, { recursive: true, force: true });
         console.log(`Eliminado: ${a}`);
       }
     }
