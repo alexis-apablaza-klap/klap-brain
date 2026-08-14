@@ -10,8 +10,9 @@ esta fijada en [stack](../klap-standard/references/stack.md).
 
 ## Cuando usar este skill
 
-Escribir o revisar tests unitarios de un `Service`, `Repository` o `Client`
-HTTP de un microservicio KLAP BYSF.
+Escribir o revisar tests unitarios de un `Service`, `Repository`, `Client`
+HTTP, `KafkaListener` o `Processor` (paso de publicación) de un microservicio
+KLAP BYSF.
 
 ## Stack de testing
 
@@ -52,6 +53,12 @@ mockeado) con Mockito: [references/mockito.md](references/mockito.md).
 
 Template para testear `XxxClient` sin levantar el contexto Spring:
 [references/mockwebserver.md](references/mockwebserver.md).
+
+## Kafka (Listener y publicación del Processor)
+
+Template para testear `XxxKafkaListener` (circuit breaker, clasificación de
+errores, orden ack/procesamiento) y el paso de publicación síncrona del
+`XxxProcessor`: [references/kafka.md](references/kafka.md).
 
 ## Naming de tests
 

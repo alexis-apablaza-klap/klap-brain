@@ -11,7 +11,7 @@ Al implementar el consumer Kafka de un dominio. El listener es la puerta de entr
 - Anotar la clase con `@Component @Slf4j @RequiredArgsConstructor`; método consumer con `@Payload`/`@Header` explícitos y `containerFactory` apuntando siempre al factory del dominio (nunca dejar el default genérico de Spring).
 - Circuit breaker manual con `AtomicInteger consecutiveFailures`: threshold de 10 fallas consecutivas, reset automático a los 60s. Sin él, una dependencia caída (BD, API externa) puede provocar un storm de reintentos.
 - Trackear el tiempo de procesamiento con `System.currentTimeMillis()` — es el insumo para calibrar `max.poll.interval.ms` (regla global, ver `../../klap-standard/references/reglas-do.md` #20).
-- Clasificación de errores en el `catch`: deterministas (`IllegalArgumentException`/`IllegalStateException`) van a `enviarADlqManual()` + `ack.acknowledge()` sin re-throw; errores de infraestructura se re-lanzan para que `KafkaConfig` aplique sus reintentos (reglas globales, ver reglas-do.md #18 y `../../klap-standard/references/reglas-dont.md` #12).
+- Clasificación de errores en el `catch`: deterministas (`NonRetryableClientDataException` — ver `../../excepciones/references/jerarquia.md`) van a `enviarADlqManual()` + `ack.acknowledge()` sin re-throw; errores de infraestructura se re-lanzan para que `KafkaConfig` aplique sus reintentos (reglas globales, ver reglas-do.md #18/#19 y `../../klap-standard/references/reglas-dont.md` #12).
 - El envío manual a DLQ es síncrono (`.get()`) — si el DLQ falla hay que saberlo de inmediato, no perderlo en silencio.
 - Nunca loguear RUT ni número de cuenta completos, ver masking de PII en `../../klap-standard/references/seguridad.md`; el contexto obligatorio de log (`idProceso`/`codigoSucursal`) está en `../../klap-standard/references/logging.md`.
 
@@ -20,6 +20,7 @@ Al implementar el consumer Kafka de un dominio. El listener es la puerta de entr
 ```java
 package cl.klap.bysf.dominio.{nombre_dominio}.listener;
 
+import cl.klap.bysf.dominio.{nombre_dominio}.exceptions.NonRetryableClientDataException;
 import cl.klap.bysf.dominio.{nombre_dominio}.model.{Xxx}InputDto;
 import cl.klap.bysf.dominio.{nombre_dominio}.services.{Xxx}Processor;
 import lombok.RequiredArgsConstructor;
@@ -69,6 +70,7 @@ public class {Xxx}KafkaListener {
      * @param idProceso identificador de correlación del proceso (header)
      * @param codigoSucursal código de la sucursal que originó la transacción (header)
      * @param ack      mecanismo de confirmación manual de offset
+     * @throws NonRetryableClientDataException si el mensaje es inválido (capturada abajo, no se propaga)
      */
     @KafkaListener(
         topics = "${kafka.topics.{dominio}.input}",
@@ -108,7 +110,7 @@ public class {Xxx}KafkaListener {
             log.info("✅ Mensaje procesado exitosamente | idProceso={} | codigoSucursal={} | ms={}",
                 idProceso, codigoSucursal, elapsed);
 
-        } catch (IllegalArgumentException | IllegalStateException e) {
+        } catch (NonRetryableClientDataException e) {
             // ── Error determinista: datos del mensaje inválidos ───────────
             // No tiene sentido reintentar — el mensaje nunca será válido.
             // Enviar a DLQ manualmente y confirmar el ack para liberar la partición.
@@ -143,14 +145,14 @@ public class {Xxx}KafkaListener {
      *
      * @param mensaje   DTO a validar
      * @param idProceso identificador de correlación para logging
-     * @throws IllegalArgumentException si el mensaje está incompleto o malformado
+     * @throws NonRetryableClientDataException si el mensaje está incompleto o malformado
      */
     private void validarMensaje({Xxx}InputDto mensaje, String idProceso) {
         if (mensaje == null) {
-            throw new IllegalArgumentException("Mensaje nulo recibido | idProceso=" + idProceso);
+            throw new NonRetryableClientDataException("Mensaje nulo recibido | idProceso=" + idProceso);
         }
         // Agregar validaciones de campos obligatorios específicos del dominio
-        // Ejemplo: if (mensaje.getIdTransaccion() == null) throw new IllegalArgumentException(...)
+        // Ejemplo: if (mensaje.getIdTransaccion() == null) throw new NonRetryableClientDataException(...)
     }
 
     /**
@@ -211,6 +213,7 @@ public class {Xxx}KafkaListener {
 ```java
 package cl.klap.bysf.dominio.liquidacion.listener;
 
+import cl.klap.bysf.dominio.liquidacion.exceptions.NonRetryableClientDataException;
 import cl.klap.bysf.dominio.liquidacion.model.LiquidacionInputDto;
 import cl.klap.bysf.dominio.liquidacion.services.LiquidacionProcessor;
 import lombok.RequiredArgsConstructor;
@@ -285,7 +288,7 @@ public class LiquidacionKafkaListener {
             actualizarMaxProcessingTime(elapsed);
             log.info("✅ Liquidación procesada | idProceso={} | codigoSucursal={} | ms={}", idProceso, codigoSucursal, elapsed);
 
-        } catch (IllegalArgumentException | IllegalStateException e) {
+        } catch (NonRetryableClientDataException e) {
             log.error("❌ Error determinista en liquidación | idProceso={} | error={}", idProceso, e.getMessage());
             enviarADlqManual(mensaje, idProceso, e);
             ack.acknowledge();
@@ -304,9 +307,9 @@ public class LiquidacionKafkaListener {
     }
 
     private void validarMensaje(LiquidacionInputDto mensaje, String idProceso) {
-        if (mensaje == null) throw new IllegalArgumentException("Mensaje nulo | idProceso=" + idProceso);
-        if (mensaje.getIdTransaccion() == null) throw new IllegalArgumentException("idTransaccion requerido | idProceso=" + idProceso);
-        if (mensaje.getCodigoSucursal() == null) throw new IllegalArgumentException("codigoSucursal requerido | idProceso=" + idProceso);
+        if (mensaje == null) throw new NonRetryableClientDataException("Mensaje nulo | idProceso=" + idProceso);
+        if (mensaje.getIdTransaccion() == null) throw new NonRetryableClientDataException("idTransaccion requerido | idProceso=" + idProceso);
+        if (mensaje.getCodigoSucursal() == null) throw new NonRetryableClientDataException("codigoSucursal requerido | idProceso=" + idProceso);
     }
 
     private void enviarADlqManual(Object mensaje, String idProceso, Exception causa) {

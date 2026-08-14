@@ -24,8 +24,9 @@ fijo de 6 pasos, con la logica especifica de cada dominio inyectada en los
 metodos privados.
 
 1. **Validar payload** — sincronico, sin dependencias externas. Payload
-   invalido lanza `IllegalArgumentException` (error determinista, sin retry).
-2. **Consultar API externa** — delega en `{Xxx}Client` (ver skill `webclient`).
+   invalido lanza `NonRetryableClientDataException` (error determinista, sin
+   retry — ver `../excepciones/references/jerarquia.md`).
+2. **Consultar API externa** — delega en `{Xxx}Client` (ver skill `http-cliente`).
 3. **Procesar logica de negocio** — combina input + datos externos en el DTO de salida.
 4. **Persistir** — `{Xxx}Repository` sobre `JdbcTemplate` (ver skill `repository`).
 5. **Publicar output en Kafka** — topic de salida propio del dominio.

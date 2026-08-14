@@ -4,7 +4,11 @@ Router: `knowledge/kafka/SKILL.md`.
 
 ## Cuándo usar
 
-Al completar o revisar la sección Kafka de los 4 archivos de ambiente obligatorios: `application-local.properties`, `application-develop.properties`, `application-qa.properties`, `application-master.properties`. Estructura de archivos, formato `.properties` y reglas no-Kafka del microservicio: ver skill `spring-properties`.
+Al completar o revisar la sección Kafka de los 4 archivos de ambiente obligatorios: `application-local.properties`, `application-develop.properties`, `application-qa.properties`, `application-master.properties`. Estructura general del archivo `.properties` y reglas no-Kafka: ver `../../klap-standard/references/arquitectura.md`.
+
+## Advertencia: propiedades ignoradas por los factories manuales
+
+Con `KafkaConfig` (`kafka-config-base.md`) los `ConsumerFactory`/`ProducerFactory` se construyen a mano — Spring Boot **desactiva su auto-configuración de Kafka** al detectar esos beans manuales. Consecuencia real: las propiedades de auto-configuración `spring.kafka.consumer.*` y `spring.kafka.producer.*` (deserializer, `group-id`, `acks`, etc. declaradas como properties top-level, no dentro de `spring.kafka.consumer.properties.*`) **no tienen efecto** sobre esos beans — solo aplicarían si Spring Boot construyera el cliente automáticamente, lo que no ocurre en este stack. El `groupId` real lo fija el segundo argumento de `createConsumerFactory(...)` en código (ver `config.md`), no `spring.kafka.consumer.group-id`. Mantener esas líneas como documentación de referencia no rompe nada, pero no asumas que cambiarlas cambia el comportamiento real.
 
 ## Reglas específicas de Kafka por ambiente
 
@@ -16,6 +20,7 @@ Al completar o revisar la sección Kafka de los 4 archivos de ambiente obligator
 - `max.request.size`: `1048576` (1MB) en local; `10485760` (10MB) en develop/qa/master, para listas grandes en notificaciones modo FULL.
 - Loggers `org.apache.kafka` / `org.springframework.kafka`: `WARN` en local, `ERROR` en develop/qa/master — nunca `DEBUG`, generan ruido excesivo por el polling.
 - `enable.auto.commit=false` en todos los ambientes — el commit lo maneja el listener vía `AckMode.MANUAL` (regla global, ver `../../klap-standard/references/reglas-do.md` #9).
+- Las claves `kafka.topics.{dominio}.*` SÍ son leídas directamente por `@Value` en `{Xxx}KafkaConfig` y por `@KafkaListener(topics = ...)` (ver `config.md`, `listener.md`) — deben coincidir exactamente, a diferencia de `spring.kafka.consumer.*`/`producer.*` (ver advertencia arriba).
 
 ## Template LOCAL (`application-local.properties`)
 
@@ -23,10 +28,10 @@ Al completar o revisar la sección Kafka de los 4 archivos de ambiente obligator
 # ===================================================================
 # KAFKA - TOPICS
 # ===================================================================
-app.kafka.topic.input={nombre-topico-entrada}
-app.kafka.topic.output={nombre-topico-salida}
-app.kafka.topic.notification={nombre-topico-notificacion}
-app.kafka.topic.dlt=dlq-{nombre-topico-entrada}
+kafka.topics.{dominio}.input={nombre-topico-entrada}
+kafka.topics.{dominio}.output={nombre-topico-salida}
+kafka.topics.notificacion={nombre-topico-notificacion}
+kafka.topics.{dominio}.dlq=dlq-{nombre-topico-entrada}
 app.kafka.group-id={consumer-group}-local
 
 # ===================================================================
@@ -90,10 +95,10 @@ logging.level.org.springframework.kafka=WARN
 # ===================================================================
 # KAFKA - TOPICS
 # ===================================================================
-app.kafka.topic.input={nombre-topico-entrada}
-app.kafka.topic.output={nombre-topico-salida}
-app.kafka.topic.notification={nombre-topico-notificacion}
-app.kafka.topic.dlt=dlq-{nombre-topico-entrada}
+kafka.topics.{dominio}.input={nombre-topico-entrada}
+kafka.topics.{dominio}.output={nombre-topico-salida}
+kafka.topics.notificacion={nombre-topico-notificacion}
+kafka.topics.{dominio}.dlq=dlq-{nombre-topico-entrada}
 app.kafka.group-id={consumer-group}
 
 # ===================================================================

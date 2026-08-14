@@ -13,20 +13,22 @@ Al crear o modificar la configuración Kafka de un dominio (`XxxKafkaConfig`), i
 
 | Situación | Leer |
 |---|---|
+| Crear la clase base `KafkaConfig` en un microservicio nuevo, o auditar una existente | `references/kafka-config-base.md` |
 | Crear/modificar `XxxKafkaConfig` — beans de consumer/producer factory, DLQ | `references/config.md` |
 | Implementar el `@KafkaListener` — circuit breaker, ack manual, clasificación de errores | `references/listener.md` |
 | Completar la sección Kafka de `application-{ambiente}.properties` | `references/properties.md` |
 
 ## Resumen de cada reference
 
+- **kafka-config-base.md** — código completo de la clase base `KafkaConfig`: factory methods de consumer/producer/DLQ, `client.id` con hostname (distingue réplicas ECS en Confluent), `DeadLetterPublishingRecoverer` para el DLQ automático.
 - **config.md** — template de `XxxKafkaConfig extends KafkaConfig`: los 6 beans (consumer factory, listener container factory, producer factory, 3 `KafkaTemplate`), DLQ con reintentos, `PLAINTEXT` en local vs `SASL_SSL` en el resto.
-- **listener.md** — template de `XxxKafkaListener`: `@KafkaListener` con `containerFactory` explícito, circuit breaker (`AtomicInteger`, threshold 10, reset 60s), clasificación determinista vs infraestructura, envío manual a DLQ.
-- **properties.md** — bloque Kafka de `application-{ambiente}.properties` para los 4 ambientes obligatorios: bootstrap servers, seguridad, consumer/producer, tabla de diffs entre ambientes.
+- **listener.md** — template de `XxxKafkaListener`: `@KafkaListener` con `containerFactory` explícito, circuit breaker (`AtomicInteger`, threshold 10, reset 60s), clasificación determinista (`NonRetryableClientDataException`) vs infraestructura, envío manual a DLQ.
+- **properties.md** — bloque Kafka de `application-{ambiente}.properties` para los 4 ambientes obligatorios: bootstrap servers, seguridad, consumer/producer, tabla de diffs entre ambientes, advertencia sobre propiedades ignoradas por factories manuales.
 
 ## Reglas globales aplicables (no repetidas aquí)
 
 Ver `knowledge/klap-standard`:
-- `references/reglas-do.md` — #7 (extender `KafkaConfig`), #9 (`AckMode.MANUAL`), #10 (`max.poll.records=1`), #11 (`enable.metrics.push=false`), #12 (`ErrorHandlingDeserializer`), #15 (envío síncrono `.get()` en dominios financieros), #18 (clasificar errores deterministas vs infraestructura), #20 (ajustar `max.poll.interval.ms` según medición real).
+- `references/reglas-do.md` — #7 (extender `KafkaConfig`), #9 (`AckMode.MANUAL`), #10 (`max.poll.records=1`), #11 (`enable.metrics.push=false`), #12 (`ErrorHandlingDeserializer`), #15 (envío síncrono `.get()` en dominios financieros), #18 (clasificar errores deterministas vs infraestructura), #19 (`NonRetryableClientDataException` para errores de datos), #20 (ajustar `max.poll.interval.ms` según medición real).
 - `references/reglas-dont.md` — #1 (no duplicar config Kafka entre dominios), #2 (no crear `ErrorHandler` sin extender la base), #7 (no crear consumer groups extra sin justificar), #8 (no omitir `enable.metrics.push=false`), #10 (no ignorar `max.poll.interval.ms`), #12 (no enviar a DLQ desde el listener por errores de infraestructura).
 - `references/naming.md` — patrón `XxxKafkaListener` / `XxxKafkaConfig`.
 - `references/seguridad.md` — gestión de secretos (variables de entorno, nunca literal) y masking de PII en logs.

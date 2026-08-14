@@ -12,6 +12,8 @@ flujo, sin repetir la explicacion de por que existe.
 ```java
 package cl.klap.bysf.dominio.{nombre_dominio}.services;
 
+import cl.klap.bysf.dominio.{nombre_dominio}.exceptions.NonRetryableClientDataException;
+
 /**
  * Contrato del processor de {NombreDominio}.
  * Orquesta el flujo completo de procesamiento de un mensaje Kafka
@@ -28,8 +30,9 @@ public interface {Xxx}Processor {
      * @param mensaje        DTO con los datos del mensaje recibido del topic Kafka
      * @param idProceso      identificador de correlación del proceso
      * @param codigoSucursal código de la sucursal que originó la transacción
-     * @throws IllegalArgumentException     si el payload del mensaje es inválido (error determinista)
-     * @throws IllegalStateException        si el estado de negocio impide el procesamiento
+     * @throws NonRetryableClientDataException si el payload es inválido o una
+     *         regla de negocio determinista impide el procesamiento (ver
+     *         `../../excepciones/references/jerarquia.md`)
      */
     void procesar{Xxx}({Xxx}InputDto mensaje, String idProceso, String codigoSucursal);
 }
@@ -40,6 +43,7 @@ public interface {Xxx}Processor {
 ```java
 package cl.klap.bysf.dominio.{nombre_dominio}.services.impl;
 
+import cl.klap.bysf.dominio.{nombre_dominio}.exceptions.NonRetryableClientDataException;
 import cl.klap.bysf.dominio.{nombre_dominio}.model.{Xxx}InputDto;
 import cl.klap.bysf.dominio.{nombre_dominio}.model.{Xxx}OutputDto;
 import cl.klap.bysf.dominio.{nombre_dominio}.model.NotificacionDto;
@@ -88,14 +92,14 @@ public class {Xxx}ProcessorImpl implements {Xxx}Processor {
      * @param mensaje        DTO con los datos del mensaje recibido
      * @param idProceso      identificador de correlación del proceso
      * @param codigoSucursal código de la sucursal que originó la transacción
-     * @throws IllegalArgumentException si el payload es inválido (error determinista)
+     * @throws NonRetryableClientDataException si el payload es inválido (error determinista)
      */
     @Override
     public void procesar{Xxx}({Xxx}InputDto mensaje, String idProceso, String codigoSucursal) {
         log.info("🔄 Iniciando saga {NombreDominio} | idProceso={} | codigoSucursal={}", idProceso, codigoSucursal);
 
         // ── Paso 1: Validar payload del mensaje ───────────────────────────
-        // Errores aquí = IllegalArgumentException = error determinista
+        // Errores aquí = NonRetryableClientDataException = error determinista
         // El Listener los enviará a DLQ manual sin reintentar
         validarPayload(mensaje, idProceso);
 
@@ -161,13 +165,13 @@ public class {Xxx}ProcessorImpl implements {Xxx}Processor {
      *
      * @param mensaje   DTO a validar
      * @param idProceso identificador de correlación para logging
-     * @throws IllegalArgumentException si el payload es inválido o incompleto
+     * @throws NonRetryableClientDataException si el payload es inválido o incompleto
      */
     private void validarPayload({Xxx}InputDto mensaje, String idProceso) {
         // Agregar validaciones específicas del dominio
         // Ejemplo:
         // if (mensaje.getMonto() == null || mensaje.getMonto().compareTo(BigDecimal.ZERO) <= 0) {
-        //     throw new IllegalArgumentException("Monto inválido | idProceso=" + idProceso);
+        //     throw new NonRetryableClientDataException("Monto inválido | idProceso=" + idProceso);
         // }
         log.debug("✅ Payload validado | idProceso={}", idProceso);
     }
@@ -263,6 +267,7 @@ public class {Xxx}ProcessorImpl implements {Xxx}Processor {
 // Interface: LiquidacionProcessor.java
 package cl.klap.bysf.dominio.liquidacion.services;
 
+import cl.klap.bysf.dominio.liquidacion.exceptions.NonRetryableClientDataException;
 import cl.klap.bysf.dominio.liquidacion.model.LiquidacionInputDto;
 
 /**
@@ -280,7 +285,7 @@ public interface LiquidacionProcessor {
      * @param mensaje        DTO con los datos de la solicitud de liquidación
      * @param idProceso      identificador de correlación del proceso
      * @param codigoSucursal código de la sucursal que originó la solicitud
-     * @throws IllegalArgumentException si el payload es inválido (error determinista)
+     * @throws NonRetryableClientDataException si el payload es inválido (error determinista)
      */
     void procesarLiquidacion(LiquidacionInputDto mensaje, String idProceso, String codigoSucursal);
 }
@@ -290,6 +295,7 @@ public interface LiquidacionProcessor {
 // Implementación: LiquidacionProcessorImpl.java
 package cl.klap.bysf.dominio.liquidacion.services.impl;
 
+import cl.klap.bysf.dominio.liquidacion.exceptions.NonRetryableClientDataException;
 import cl.klap.bysf.dominio.liquidacion.model.*;
 import cl.klap.bysf.dominio.liquidacion.repository.LiquidacionRepository;
 import cl.klap.bysf.dominio.liquidacion.repository.AuditoriaLiquidacionRepository;
@@ -336,7 +342,7 @@ public class LiquidacionProcessorImpl implements LiquidacionProcessor {
      * @param mensaje        DTO con los datos de la solicitud de liquidación
      * @param idProceso      identificador de correlación del proceso
      * @param codigoSucursal código de la sucursal
-     * @throws IllegalArgumentException si el monto o idTransaccion son inválidos
+     * @throws NonRetryableClientDataException si el monto o idTransaccion son inválidos
      */
     @Override
     public void procesarLiquidacion(LiquidacionInputDto mensaje, String idProceso, String codigoSucursal) {
@@ -400,9 +406,9 @@ public class LiquidacionProcessorImpl implements LiquidacionProcessor {
 
     private void validarPayload(LiquidacionInputDto m, String idProceso) {
         if (m.getIdTransaccion() == null)
-            throw new IllegalArgumentException("idTransaccion requerido | idProceso=" + idProceso);
+            throw new NonRetryableClientDataException("idTransaccion requerido | idProceso=" + idProceso);
         if (m.getMonto() == null || m.getMonto().compareTo(BigDecimal.ZERO) <= 0)
-            throw new IllegalArgumentException("Monto inválido | idProceso=" + idProceso);
+            throw new NonRetryableClientDataException("Monto inválido | idProceso=" + idProceso);
         log.debug("✅ Payload validado | idProceso={}", idProceso);
     }
 

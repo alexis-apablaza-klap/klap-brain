@@ -4,7 +4,7 @@ Router: `knowledge/kafka/SKILL.md`.
 
 ## Cuándo usar
 
-Al crear la configuración Kafka de un dominio nuevo, o modificar una existente. Cada dominio tiene su propia clase `{Xxx}KafkaConfig` que extiende la clase base abstracta `KafkaConfig` (`global/config/KafkaConfig.java`), donde viven los factory methods compartidos.
+Al crear la configuración Kafka de un dominio nuevo, o modificar una existente. Cada dominio tiene su propia clase `{Xxx}KafkaConfig` que extiende la clase base abstracta `KafkaConfig` (`global/config/KafkaConfig.java`), donde viven los factory methods compartidos — código completo de la base en [kafka-config-base.md](kafka-config-base.md).
 
 ## Reglas específicas de este template
 
@@ -13,6 +13,7 @@ Al crear la configuración Kafka de un dominio nuevo, o modificar una existente.
 - `ACKS=all` en producers — dominios financieros no toleran `acks=1` ni `acks=0`.
 - DLQ con 3 reintentos y backoff de 5s antes de derivar el mensaje: `createListenerContainerFactoryWithDlq(consumerFactory, dlqTemplate, dlqTopic, 3, 5000L)`.
 - Perfil `local` usa `PLAINTEXT`; todos los demás perfiles usan `SASL_SSL` (credenciales por variable de entorno — detalle en `properties.md`).
+- `client.id` de consumer y producer incluye el hostname del contenedor (`applicationName + "-" + hostname`, ver `kafka-config-base.md`) — distingue instancias del mismo microservicio corriendo en paralelo en ECS Fargate dentro de las métricas de Confluent Cloud.
 - `AckMode.MANUAL`, `enable.metrics.push=false`, `max.poll.records=1` y `ErrorHandlingDeserializer` sobre `JsonDeserializer` son reglas globales — ver `../../klap-standard/references/reglas-do.md` (#9, #10, #11, #12).
 
 ## Skeleton de código
