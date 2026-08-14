@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Arranque en frio (Linux/macOS): verifica que Node y Docker existan antes
-# de que "npm install -g" pueda funcionar. Toda la logica real del CLI vive
+# de que "npm link" pueda funcionar. Toda la logica real del CLI vive
 # en Node (bin/klap.js); este script SOLO resuelve el problema del huevo y
 # la gallina.
 set -euo pipefail
@@ -29,4 +29,4 @@ else
 fi
 
 echo
-echo "Listo. Ahora: npm install -g . (desde esta carpeta) y luego 'klap doctor'."
+echo "Listo. Ahora: npm link (desde esta carpeta — symlink, no copia; 'git pull' alcanza a 'klap' sin reinstalar) y luego 'klap doctor'."

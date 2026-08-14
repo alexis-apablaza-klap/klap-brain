@@ -1,5 +1,5 @@
 {
-  "name": "@rodriguezyanez/klap-brain",
+  "name": "@alexis-apablaza-klap/klap-brain",
   "version": "0.1.0",
   "description": "Ecosistema de contexto compartido KLAP BYSF: topologia derivada, memoria funcional y skills.",
   "bin": {
@@ -25,7 +25,7 @@
   "dependencies": {},
   "keywords": [
     "klap",
-    "team-brain",
+    "klap-brain",
     "topology",
     "claude",
     "mcp",

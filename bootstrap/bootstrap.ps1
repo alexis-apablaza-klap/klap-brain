@@ -1,5 +1,5 @@
 # Arranque en frio (solo Windows): verifica que Node y Docker existan antes
-# de que "npm install -g" pueda funcionar. Toda la logica real del CLI vive
+# de que "npm link" pueda funcionar. Toda la logica real del CLI vive
 # en Node (bin/klap.js); este script SOLO resuelve el problema del huevo y
 # la gallina (necesitas Node para correr klap, pero klap no puede
 # instalarse solo).
@@ -33,4 +33,4 @@ if (Test-Cmd 'git') {
     Write-Host "[!!] git no encontrado — necesario para 'klap scan --repos-dir'"
 }
 
-Write-Host "`nListo. Ahora: npm install -g . (desde esta carpeta) y luego 'klap doctor'."
+Write-Host "`nListo. Ahora: npm link (desde esta carpeta — symlink, no copia; 'git pull' alcanza a 'klap' sin reinstalar) y luego 'klap doctor'."
