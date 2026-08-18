@@ -26,4 +26,5 @@ module.exports = {
   MEMORY_DIR: path.join(REPO_ROOT, 'memory'),
   MEMORY_INDEX: path.join(REPO_ROOT, 'memory', 'INDEX.md'),
   KNOWLEDGE_DIR: path.join(REPO_ROOT, 'knowledge'),
+  STACK_YML: path.join(REPO_ROOT, 'knowledge', 'klap-standard', 'references', 'stack.yml'),
 };

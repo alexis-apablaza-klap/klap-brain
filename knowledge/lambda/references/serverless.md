@@ -4,6 +4,11 @@ Router: `../SKILL.md`.
 
 ## Runtime y ejecucion
 
+- **Version de Node:** piso vigente en
+  `../../klap-standard/references/stack-npm.md` — declarar `engines.node`
+  explicito en `package.json` (hoy casi ningun Lambda real lo hace; el
+  runtime queda escondido en el `--target` del script de `esbuild`, dificil
+  de auditar).
 - **Minimizar cold start:** dependencias del handler escopadas al minimo
   necesario. Evitar arrastrar librerias pensadas para un microservicio
   Spring Boot completo (auto-configuracion, actuator, etc.) a un handler

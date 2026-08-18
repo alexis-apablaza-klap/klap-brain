@@ -1,26 +1,28 @@
-# Angular 19 + single-spa — Microfrontend
+# Angular + single-spa — Microfrontend
 
 Bootstrap, configuracion runtime y consumo del BFF desde el lado Angular,
 para los dos patrones de MCF. La arquitectura y el arbol de carpetas
-completo esta en `references/estructura.md`.
+completo esta en `references/estructura.md`. Piso de version vigente:
+`knowledge/klap-standard/references/stack-npm.md` — un MCF nuevo se crea
+directo en el piso recomendado ahi, no en lo que muestra este ejemplo.
 
 ## Dependencias clave (package.json)
 
 ```json
 {
   "dependencies": {
-    "@angular/core": "^19.2.0",
-    "@angular/router": "^19.2.0",
-    "@angular/common": "^19.2.0",
-    "@angular/forms": "^19.2.0",
+    "@angular/core": "^22.0.0",
+    "@angular/router": "^22.0.0",
+    "@angular/common": "^22.0.0",
+    "@angular/forms": "^22.0.0",
     "single-spa-angular": "^9.2.0",
     "rxjs": "~7.8.0",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-builders/custom-webpack": "^19.0.0",
-    "@angular-devkit/build-angular": "^19.2.0",
-    "@angular/cli": "^19.2.0"
+    "@angular-builders/custom-webpack": "^22.0.0",
+    "@angular-devkit/build-angular": "^22.0.0",
+    "@angular/cli": "^22.0.0"
   }
 }
 ```

@@ -1,0 +1,58 @@
+# Fuente machine-readable de la politica de versiones del equipo SVA.
+# La lee unicamente `npm run versions:check` (src/ci/versions-check.js).
+# El humano lee stack.md (indice) + stack-java.md / stack-npm.md (detalle
+# de build-tooling y convenciones). Si cambias un piso aca, actualiza
+# tambien la prosa correspondiente -- no hay gate que los cruce.
+#
+# "required": piso obligatorio -- un repo por debajo de esto rompe CI.
+# "recommended": piso preferido para PROYECTOS NUEVOS -- no bloquea CI,
+#   solo se reporta como nota. Un repo existente entre "required" y
+#   "recommended" esta en cumplimiento.
+# Toda spec de version es un piso ABIERTO (>=): "21+", "3.5.16+", etc.
+#   No hay techos ni rangos acotados (decision auditoria 2026-08-18).
+# Una libreria de esta lista que el repo no usa (o viceversa) no es falla:
+#   solo se compara la interseccion.
+
+libraries:
+  - name: "Java"
+    ecosystem: java
+    required: "21+"
+
+  - name: "Spring Boot"
+    ecosystem: java
+    required: "3.5.16+"
+    recommended: "4.1.0+"
+    note: "3.5.16+ permitido en proyectos existentes (ultima version de la linea 3.x). Todo proyecto nuevo debe crearse directo en 4.1.x+."
+
+  - name: "Gradle"
+    ecosystem: java
+    required: "9.3+"
+
+  - name: "Resilience4j"
+    ecosystem: java
+    required: "2.4.0+"
+
+  - name: "springdoc-openapi"
+    ecosystem: java
+    conditional:
+      - when:
+          library: "Spring Boot"
+          majorAtLeast: 4
+        required: "3.1.0+"
+      - required: "2.9.0+"
+
+  - name: "Angular"
+    ecosystem: npm
+    packageName: "@angular/core"
+    required: "21.0.0+"
+    recommended: "22.0.0+"
+
+  - name: "TypeScript"
+    ecosystem: npm
+    packageName: "typescript"
+    required: "5.9.0+"
+
+  - name: "Node"
+    ecosystem: npm
+    packageName: "engines.node (o @types/node como proxy)"
+    required: "24.0.0+"
