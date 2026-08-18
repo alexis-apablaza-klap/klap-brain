@@ -14,6 +14,7 @@ Al implementar el consumer Kafka de un dominio. El listener es la puerta de entr
 - Clasificación de errores en el `catch`: deterministas (`NonRetryableClientDataException` — ver `../../excepciones/references/jerarquia.md`) van a `enviarADlqManual()` + `ack.acknowledge()` sin re-throw; errores de infraestructura se re-lanzan para que `KafkaConfig` aplique sus reintentos (reglas globales, ver reglas-do.md #18/#19 y `../../klap-standard/references/reglas-dont.md` #12).
 - El envío manual a DLQ es síncrono (`.get()`) — si el DLQ falla hay que saberlo de inmediato, no perderlo en silencio.
 - Nunca loguear RUT ni número de cuenta completos, ver masking de PII en `../../klap-standard/references/seguridad.md`; el contexto obligatorio de log (`idProceso`/`codigoSucursal`) está en `../../klap-standard/references/logging.md`.
+- **Deduplicación por `event_id`:** antes de delegar al `Processor`, todo consumer debe poder detectar un reintento del mismo evento — vía constraint `UNIQUE` en la tabla de destino (creada en la migración, ver skill `persistencia` → `references/migraciones-dbmate.md`) o un chequeo transaccional contra `mc_tlog`/la tabla de dominio. **Nunca Redis ni otra cache como mecanismo de dedup**: no es la fuente de verdad transaccional y una entrada perdida (TTL, eviction, restart) reintroduce el duplicado sin que quede rastro — ver `../../klap-standard/references/reglas-dont.md` #11.
 
 ## Skeleton de código
 

@@ -36,6 +36,11 @@ cobertura (`jacocoTestReport`, `coverage/` de Angular). Evalua:
 
 Resultado: `PASSED` / `FAILED` (predicho) + metricas que lo determinan.
 
+Si el MCP `sonarqube` esta disponible en la sesion (`mcp__sonarqube__quality_gate_status`,
+`mcp__sonarqube__measures_component`), preferir la consulta en vivo por sobre
+la prediccion analitica de este paso — mismo umbral (cobertura 95%, ver
+`stack.md`), pero el dato ya no es una estimacion.
+
 ## PASO 3.2 — OWASP Dependency-Check (CVEs en dependencias)
 
 - Si `dependency-check` esta instalado: correr sobre `build.gradle`/`pom.xml`/

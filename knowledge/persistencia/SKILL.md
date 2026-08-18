@@ -17,6 +17,7 @@ DONT](../klap-standard/references/reglas-dont.md).
 |---|---|
 | `references/repository.md` | Template completo: `ConstantsQuery`, `XxxRepository` (`findById`/`insert`/`update`), `XxxRowMapper` en `mapper/`, `AuditoriaXxxRepository` |
 | `references/paginacion.md` | Paginacion cursor-based para tablas grandes: query, metodo, validaciones de `pageSize` |
+| `references/migraciones-dbmate.md` | Migraciones de esquema (`-- migrate:up`/`-- migrate:down`) para `contable`/`mc_tlog`: reversibilidad, indices, anti-patrones |
 
 ## Reglas propias de persistencia
 

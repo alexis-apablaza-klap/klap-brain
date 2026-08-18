@@ -132,6 +132,7 @@ Si algún ítem falla, iterar con el PO antes de avanzar.
 |-----------|-----------|
 | Issue HU | Jira — proyecto indicado por el PO, vinculado a épica GOBI, con CA-XX/CL-XX |
 | Página HU | Confluence — espacio del equipo dueño, vinculada al issue |
+| `requerimientos-del-negocio.md` (opcional) | Raíz del repo del componente — espejo local de la elicitación (resumen, CA, casos límite, reglas de negocio, dudas abiertas) para que `sdd` Fase 1 lo lea sin volver a golpear Jira/Confluence en cada sesión |
 
 ## Errores comunes
 

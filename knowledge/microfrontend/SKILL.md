@@ -25,6 +25,7 @@ convenciones de un patron con otro.
 | 1 | `references/estructura.md` | Diferencias entre patrones, arquitectura de cada uno, arbol de carpetas, registro en el Shell (`mcf-bo-cloud-base`), checklists finales |
 | 2 | `references/angular-single-spa.md` | Bootstrap Angular 19 + single-spa (standalone y single-spa), config runtime del BFF, interceptor de auth, servicios/modelos TypeScript |
 | 3 | `references/bff.md` | Implementacion del BFF en Spring Boot: capa JdbcTemplate (patron 1) o proxy RestTemplate hacia un upstream externo (patron 2) |
+| 4 | `references/angular-reactividad.md` | Convenciones de reactividad (RxJS vs Signals segun version) y estructura de componentes — aplica a cualquier modulo Angular del equipo, no solo al bootstrap de un MCF nuevo |
 
 ## Resumen de una linea por reference
 
