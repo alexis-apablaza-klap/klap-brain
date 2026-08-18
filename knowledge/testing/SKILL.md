@@ -1,9 +1,9 @@
 ---
 name: testing
-description: Templates de tests unitarios para services, repositories y clientes HTTP KLAP BYSF (JUnit 5, Mockito, AssertJ, MockWebServer). Usar al escribir o revisar tests unitarios de un microservicio.
+description: Templates de tests unitarios para services, repositories y clientes HTTP KLAP SVA (JUnit 5, Mockito, AssertJ, MockWebServer). Usar al escribir o revisar tests unitarios de un microservicio.
 ---
 
-# Testing — KLAP BYSF
+# Testing — KLAP SVA
 
 Router de templates de test unitario. La cobertura minima exigida (JaCoCo)
 esta fijada en [stack](../klap-standard/references/stack.md).
@@ -12,7 +12,7 @@ esta fijada en [stack](../klap-standard/references/stack.md).
 
 Escribir o revisar tests unitarios de un `Service`, `Repository`, `Client`
 HTTP, `KafkaListener` o `Processor` (paso de publicación) de un microservicio
-KLAP BYSF.
+KLAP SVA.
 
 ## Stack de testing
 

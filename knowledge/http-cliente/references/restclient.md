@@ -43,7 +43,7 @@ app:
 ## XxxClientConfig.java
 
 ```java
-package cl.klap.bysf.svbo.liquidacion.dominio.liquidacion.client.config;
+package cl.klap.sva.svbo.liquidacion.dominio.liquidacion.client.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -96,12 +96,12 @@ public class XxxClientConfig {
 ## XxxClient.java
 
 ```java
-package cl.klap.bysf.svbo.liquidacion.dominio.liquidacion.client;
+package cl.klap.sva.svbo.liquidacion.dominio.liquidacion.client;
 
-import cl.klap.bysf.svbo.liquidacion.dominio.liquidacion.client.dto.XxxRequestDto;
-import cl.klap.bysf.svbo.liquidacion.dominio.liquidacion.client.dto.XxxResponseDto;
-import cl.klap.bysf.svbo.liquidacion.dominio.liquidacion.exception.XxxClientException;
-import cl.klap.bysf.svbo.liquidacion.dominio.liquidacion.exception.XxxClientNonRetryableException;
+import cl.klap.sva.svbo.liquidacion.dominio.liquidacion.client.dto.XxxRequestDto;
+import cl.klap.sva.svbo.liquidacion.dominio.liquidacion.client.dto.XxxResponseDto;
+import cl.klap.sva.svbo.liquidacion.dominio.liquidacion.exception.XxxClientException;
+import cl.klap.sva.svbo.liquidacion.dominio.liquidacion.exception.XxxClientNonRetryableException;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;

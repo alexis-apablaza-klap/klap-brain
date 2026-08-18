@@ -1,9 +1,9 @@
 ---
 name: openapi
-description: Configuracion de OpenAPI/Swagger (springdoc) en microservicios KLAP BYSF, habilitada solo en local/develop. Usar al crear o revisar OpenApiConfig o anotaciones en controllers.
+description: Configuracion de OpenAPI/Swagger (springdoc) en microservicios KLAP SVA, habilitada solo en local/develop. Usar al crear o revisar OpenApiConfig o anotaciones en controllers.
 ---
 
-# OpenAPI — KLAP BYSF
+# OpenAPI — KLAP SVA
 
 Router de configuracion Swagger/OpenAPI. La version fijada de springdoc esta
 documentada en [stack](../klap-standard/references/stack.md).

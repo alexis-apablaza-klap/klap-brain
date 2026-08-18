@@ -1,9 +1,9 @@
 ---
 name: sdd
-description: Protocolo SDD de 5 fases (Explorar/Analizar, Proponer, Validar, Implementar, Verificar) para microservicios KLAP BYSF. Activar con "sdd:" (nuevo) o "sdd-refactor:" (refactor).
+description: Protocolo SDD de 5 fases (Explorar/Analizar, Proponer, Validar, Implementar, Verificar) para microservicios KLAP SVA. Activar con "sdd:" (nuevo) o "sdd-refactor:" (refactor).
 ---
 
-# SDD — Spec-Driven Development (KLAP BYSF)
+# SDD — Spec-Driven Development (KLAP SVA)
 
 ## Qué es
 

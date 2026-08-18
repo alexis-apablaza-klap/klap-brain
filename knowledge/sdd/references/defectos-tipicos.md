@@ -1,6 +1,6 @@
 # Defectos típicos del equipo — 6 categorías
 
-Defectos recurrentes detectados en desarrollos del equipo KLAP BYSF. Los
+Defectos recurrentes detectados en desarrollos del equipo KLAP SVA. Los
 agentes del SDD deben consultar esta lista para asegurar que el plan los
 aborda explícitamente.
 

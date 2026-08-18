@@ -1,4 +1,4 @@
-# Estandares de seguridad — KLAP BYSF
+# Estandares de seguridad — KLAP SVA
 
 Aplican a todo microservicio, sin excepcion. Ver tambien el skill `auditoria`
 para como se verifican automaticamente antes de certificacion.

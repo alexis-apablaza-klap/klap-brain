@@ -74,11 +74,11 @@ Identificación de patrones de diseño y análisis de concurrencia: metodología
 
 ### Entregable obligatorio
 
-- [ ] Arquitectura en capas con separación **global / dominio** y estructura de paquetes completa (`cl.klap.bysf.{modulo}.{aplicacion}` + `dominio/{nombre_dominio}/`) — ver `../../klap-standard/references/arquitectura.md`
+- [ ] Arquitectura en capas con separación **global / dominio** y estructura de paquetes completa (`cl.klap.sva.{modulo}.{aplicacion}` + `dominio/{nombre_dominio}/`) — ver `../../klap-standard/references/arquitectura.md`
 - [ ] Contratos de interfaces con package correcto en cada firma
 - [ ] Decisiones técnicas con justificación
 - [ ] **Columnas que almacenan respuestas de APIs externas** (error bodies, provider responses) — declarar como `text`, nunca `json`/`jsonb`; ver la justificación completa en `../../klap-standard/references/seguridad.md`
-- [ ] Alineación con estándar KLAP BYSF confirmada
+- [ ] Alineación con estándar KLAP SVA confirmada
 - [ ] Desviaciones del estándar explícitamente señaladas
 - [ ] Archivos `application-{ambiente}.properties` diseñados para los 4 ambientes (local/develop/qa/master) — si el microservicio incluye Kafka
 - [ ] Entregable de `fase2-diseno-concurrencia.md` completo (patrones, concurrencia, race conditions, seguridad)

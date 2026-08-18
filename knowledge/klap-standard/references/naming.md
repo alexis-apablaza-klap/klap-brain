@@ -1,4 +1,4 @@
-# Convenciones de naming — KLAP BYSF
+# Convenciones de naming — KLAP SVA
 
 | Componente | Patron | Anotacion |
 |---|---|---|

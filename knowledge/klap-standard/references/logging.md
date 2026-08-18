@@ -1,4 +1,4 @@
-# Convenciones de logging — KLAP BYSF
+# Convenciones de logging — KLAP SVA
 
 | Nivel | Uso |
 |---|---|

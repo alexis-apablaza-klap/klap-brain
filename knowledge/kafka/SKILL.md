@@ -1,9 +1,9 @@
 ---
 name: kafka
-description: Crear/modificar XxxKafkaConfig o XxxKafkaListener, o completar properties Kafka por ambiente (local/develop/qa/master) de un dominio KLAP BYSF.
+description: Crear/modificar XxxKafkaConfig o XxxKafkaListener, o completar properties Kafka por ambiente (local/develop/qa/master) de un dominio KLAP SVA.
 ---
 
-# Kafka — KLAP BYSF
+# Kafka — KLAP SVA
 
 ## Cuándo usar este skill
 

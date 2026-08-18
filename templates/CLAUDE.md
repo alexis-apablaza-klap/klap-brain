@@ -1,4 +1,4 @@
-# Ecosistema Klap-Brain — Protocolo de asistencia KLAP BYSF
+# Ecosistema Klap-Brain — Protocolo de asistencia KLAP SVA
 
 ## Comportamiento
 
@@ -50,7 +50,7 @@ que otros skills leer en cada fase segun los componentes identificados.
 Los skills de `knowledge/` se descubren automaticamente por su `description`
 — no hace falta un indice manual aca. Si una tarea toca Kafka, persistencia,
 HTTP externo, excepciones, testing, OpenAPI, microfrontends, auditoria previa
-a certificacion, o el propio estandar KLAP BYSF, el skill correspondiente se
+a certificacion, o el propio estandar KLAP SVA, el skill correspondiente se
 activa solo. Ante la duda, `knowledge/klap-standard` es la fuente de verdad
 de arquitectura, naming y reglas DO/DONT.
 

@@ -1,6 +1,6 @@
 ---
 name: lambda
-description: Guias de AWS Lambda/Serverless (cold start, handlers SQS/SNS/API Gateway, alineacion con Terraform) para componentes lbd- KLAP BYSF. Usar al implementar o revisar una funcion Lambda.
+description: Guias de AWS Lambda/Serverless (cold start, handlers SQS/SNS/API Gateway, alineacion con Terraform) para componentes lbd- KLAP SVA. Usar al implementar o revisar una funcion Lambda.
 ---
 
 # Lambda — AWS Serverless

@@ -8,7 +8,7 @@ description: Crear o mantener un XxxRepository con JdbcTemplate (ConstantsQuery,
 ## Cuando usar este skill
 
 Al implementar acceso a datos en PostgreSQL Aurora para un `XxxRepository` de
-cualquier dominio KLAP BYSF. Prohibido JPA/Hibernate — ver [reglas
+cualquier dominio KLAP SVA. Prohibido JPA/Hibernate — ver [reglas
 DONT](../klap-standard/references/reglas-dont.md).
 
 ## Que leer

@@ -1,4 +1,4 @@
-# Arquitectura de referencia — Microservicio Event-Driven KLAP BYSF
+# Arquitectura de referencia — Microservicio Event-Driven KLAP SVA
 
 ## Capas
 
@@ -22,7 +22,7 @@ Tipo de arquitectura: **Event-Driven Microservice**.
 ## Estructura de paquetes
 
 ```
-src/main/java/cl/klap/bysf/{modulo}/{aplicacion}/
+src/main/java/cl/klap/sva/{modulo}/{aplicacion}/
 ├── global/
 │   ├── config/          # configuracion compartida entre dominios
 │   ├── model/dto/

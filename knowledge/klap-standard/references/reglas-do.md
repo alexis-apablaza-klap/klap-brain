@@ -1,4 +1,4 @@
-# Reglas DO — practicas obligatorias KLAP BYSF
+# Reglas DO — practicas obligatorias KLAP SVA
 
 1. Definir siempre una interfaz de servicio antes de su implementacion.
 2. Usar Lombok: `@Data`, `@Builder`, `@RequiredArgsConstructor`, `@Slf4j`.

@@ -23,7 +23,7 @@
 ### `LiquidacionException.java` — Base del dominio
 
 ```java
-package cl.klap.bysf.svbo.liquidacion.dominio.liquidacion.exceptions;
+package cl.klap.sva.svbo.liquidacion.dominio.liquidacion.exceptions;
 
 /**
  * Excepción base del dominio Liquidacion.
@@ -56,7 +56,7 @@ public class LiquidacionException extends RuntimeException {
 ### `LiquidacionClientException.java` — Errores de API externa
 
 ```java
-package cl.klap.bysf.svbo.liquidacion.dominio.liquidacion.exceptions;
+package cl.klap.sva.svbo.liquidacion.dominio.liquidacion.exceptions;
 
 /**
  * Excepción lanzada cuando una API externa responde con error (4xx o 5xx).
@@ -127,7 +127,7 @@ public class LiquidacionClientException extends LiquidacionException {
 ### `LiquidacionPersistenceException.java` — Errores de base de datos
 
 ```java
-package cl.klap.bysf.svbo.liquidacion.dominio.liquidacion.exceptions;
+package cl.klap.sva.svbo.liquidacion.dominio.liquidacion.exceptions;
 
 /**
  * Excepción lanzada cuando ocurre un error de acceso a la base de datos en el dominio Liquidacion.
@@ -162,7 +162,7 @@ public class LiquidacionPersistenceException extends LiquidacionException {
 ### `NonRetryableClientDataException.java` — Errores irrecuperables (DLQ)
 
 ```java
-package cl.klap.bysf.svbo.liquidacion.dominio.liquidacion.exceptions;
+package cl.klap.sva.svbo.liquidacion.dominio.liquidacion.exceptions;
 
 /**
  * Excepción para errores de datos irrecuperables en mensajes Kafka.
@@ -202,7 +202,7 @@ public class NonRetryableClientDataException extends RuntimeException {
 ### `KafkaMessageException.java` — Errores de serialización
 
 ```java
-package cl.klap.bysf.svbo.liquidacion.dominio.liquidacion.exceptions;
+package cl.klap.sva.svbo.liquidacion.dominio.liquidacion.exceptions;
 
 /**
  * Excepción para errores de serialización y deserialización de mensajes Kafka.

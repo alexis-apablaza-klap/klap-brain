@@ -3,7 +3,7 @@
 Cubre Fase 1 (Analizar), Fase 2 (Proponer) y Fase 3 (Validar) para **refactorización de proyectos existentes**: análisis del estado actual, arquitectura objetivo y planificación de la transformación. El resultado es un par de documentos spec que el dev usa como input de `fase4-5-implementar-verificar.md`.
 
 **Aplica a:** proyectos Java/Spring Boot existentes que requieren modernización, migración de versiones, reestructuración arquitectónica o eliminación de deuda técnica. El scope es intencionalmente Java/Spring Boot — los skills de referencia (`processor`, `persistencia`, `http-cliente`, `kafka`) son específicos de este stack.
-**Queda fuera:** desarrollos nuevos (usar `fase1-3-nuevo.md`), fixes puntuales, hotfixes y proyectos en otros lenguajes que no usen el stack KLAP BYSF Java.
+**Queda fuera:** desarrollos nuevos (usar `fase1-3-nuevo.md`), fixes puntuales, hotfixes y proyectos en otros lenguajes que no usen el stack KLAP SVA Java.
 
 ## Activación
 
@@ -23,7 +23,7 @@ Con la respuesta se determinan los ámbitos activos para la sesión.
 
 | Ámbito | Activación | Descripción |
 |--------|-----------|-------------|
-| **Ámbito 1 — Refactorización** | Siempre activo | Analizar el código existente, identificar deuda técnica y proponer la arquitectura objetivo alineada al estándar KLAP BYSF |
+| **Ámbito 1 — Refactorización** | Siempre activo | Analizar el código existente, identificar deuda técnica y proponer la arquitectura objetivo alineada al estándar KLAP SVA |
 | **Ámbito 2 — Nuevos requerimientos** | Solo si el dev lo confirma | Incorporar requerimientos funcionales nuevos para el mismo componente sobre la arquitectura objetivo |
 
 Ambos ámbitos se procesan en las mismas tres fases. Los entregables marcados `[Ámbito 2]` se generan únicamente si el dev confirmó que hay nuevos requerimientos.
@@ -165,7 +165,7 @@ Solo si la información no es derivable del análisis de Fase 1:
 
 ### Entregable obligatorio — Ámbito 1 (Refactorización)
 
-- [ ] **Arquitectura objetivo**: capas global/dominio con estructura de paquetes completa (`cl.klap.bysf.{modulo}.{aplicacion}` + `dominio/{nombre_dominio}/` — ver `../../klap-standard/references/arquitectura.md`), versión de Java y Spring Boot objetivo, dependencias a actualizar/agregar/eliminar
+- [ ] **Arquitectura objetivo**: capas global/dominio con estructura de paquetes completa (`cl.klap.sva.{modulo}.{aplicacion}` + `dominio/{nombre_dominio}/` — ver `../../klap-standard/references/arquitectura.md`), versión de Java y Spring Boot objetivo, dependencias a actualizar/agregar/eliminar
 - [ ] Skills relevantes leídos y aplicados — listar cuáles se consultaron
 - [ ] **Estrategia de migración** elegida y justificada
 - [ ] **Mapa de transformación** — tabla comparativa estado actual → estado objetivo por componente:
@@ -187,7 +187,7 @@ Solo si la información no es derivable del análisis de Fase 1:
 
 - [ ] **Contratos de interfaces** con package correcto en cada firma
 - [ ] **Decisiones técnicas** con justificación
-- [ ] **Alineación con estándar KLAP BYSF** confirmada
+- [ ] **Alineación con estándar KLAP SVA** confirmada
 - [ ] **Desviaciones del estándar** explícitamente señaladas (con justificación si aplica al contexto legacy)
 - [ ] **Archivos `application-{ambiente}.properties`** diseñados para los 4 ambientes (local/develop/qa/master) — si el microservicio incluye Kafka o cambia configuración significativamente
 - [ ] **Plan de rollback** — cómo revertir si la migración falla en producción
@@ -195,7 +195,7 @@ Solo si la información no es derivable del análisis de Fase 1:
 
 ### Entregable obligatorio — Ámbito 2 (Nuevos requerimientos, solo si está activo)
 
-- [ ] **Nuevos componentes a crear** — con package, nombre de clase y patrón KLAP BYSF aplicado
+- [ ] **Nuevos componentes a crear** — con package, nombre de clase y patrón KLAP SVA aplicado
 - [ ] **Contratos de interfaces nuevas** con firma completa
 - [ ] **Integración con la arquitectura objetivo** — cómo los nuevos componentes se conectan con los refactorizados (no duplicar capas, reutilizar repositories/clients ya propuestos)
 - [ ] **Cambios en BD** requeridos (nuevas tablas, columnas, índices, script Flyway)

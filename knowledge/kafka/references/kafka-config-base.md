@@ -27,7 +27,7 @@ dominio la extienden, nunca la duplican (`../../klap-standard/references/reglas-
 ## Código completo
 
 ```java
-package cl.klap.bysf.global.config;
+package cl.klap.sva.global.config;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -55,7 +55,7 @@ import jakarta.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
-import cl.klap.bysf.global.exceptions.NonRetryableClientDataException;
+import cl.klap.sva.global.exceptions.NonRetryableClientDataException;
 
 /**
  * Clase base abstracta para configuración de Apache Kafka. Expone factory

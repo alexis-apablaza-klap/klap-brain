@@ -19,9 +19,9 @@ Al crear la configuración Kafka de un dominio nuevo, o modificar una existente.
 ## Skeleton de código
 
 ```java
-package cl.klap.bysf.dominio.{nombre_dominio}.config;
+package cl.klap.sva.dominio.{nombre_dominio}.config;
 
-import cl.klap.bysf.global.config.KafkaConfig;
+import cl.klap.sva.global.config.KafkaConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.beans.factory.annotation.Value;
@@ -156,10 +156,10 @@ public class {Xxx}KafkaConfig extends KafkaConfig {
 ## Ejemplo completo — dominio Liquidación
 
 ```java
-package cl.klap.bysf.dominio.liquidacion.config;
+package cl.klap.sva.dominio.liquidacion.config;
 
-import cl.klap.bysf.dominio.liquidacion.model.LiquidacionInputDto;
-import cl.klap.bysf.global.config.KafkaConfig;
+import cl.klap.sva.dominio.liquidacion.model.LiquidacionInputDto;
+import cl.klap.sva.global.config.KafkaConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.beans.factory.annotation.Value;

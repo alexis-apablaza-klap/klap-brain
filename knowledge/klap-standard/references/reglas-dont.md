@@ -1,4 +1,4 @@
-# Reglas DONT — anti-patrones prohibidos KLAP BYSF
+# Reglas DONT — anti-patrones prohibidos KLAP SVA
 
 1. No duplicar configuracion Kafka — extender la clase base `KafkaConfig`.
 2. No crear nuevos error handlers de Kafka sin extender el de `KafkaConfig`.

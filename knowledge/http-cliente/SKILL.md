@@ -1,13 +1,13 @@
 ---
 name: http-cliente
-description: Cliente HTTP externo con RestClient (no WebFlux/WebClient) para llamar APIs REST externas desde un servicio KLAP BYSF. Usar antes de crear un XxxClient o XxxClientConfig.
+description: Cliente HTTP externo con RestClient (no WebFlux/WebClient) para llamar APIs REST externas desde un servicio KLAP SVA. Usar antes de crear un XxxClient o XxxClientConfig.
 ---
 
 # HTTP Cliente — RestClient
 
 ## Cuando usar este skill
 
-Al llamar a una API externa (REST) desde un servicio KLAP BYSF. No aplica a
+Al llamar a una API externa (REST) desde un servicio KLAP SVA. No aplica a
 comunicación interna entre microservicios via Kafka (ver skill `kafka`).
 
 **Decision de stack, ya resuelta — no discutir de nuevo:** el cliente HTTP es

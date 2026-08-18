@@ -8,7 +8,7 @@ allowed-tools: Read, Write, Grep, Glob, Bash, TaskCreate, TaskUpdate, TaskList
 # Auditoria de pre-certificacion — Estandar KLAP + gates de Jenkins
 
 Objetivo: **predecir si el entregable pasara los quality gates del pipeline Jenkins**
-(SonarQube, OWASP Dependency-Check, Trivy) y si cumple el estandar KLAP BYSF. Cada
+(SonarQube, OWASP Dependency-Check, Trivy) y si cumple el estandar KLAP SVA. Cada
 desviacion es un hallazgo con severidad, y todo se resuelve en un veredicto unico.
 
 > **Solo lectura.** No se modifica codigo. Se detecta, se ejecutan escaneres cuando

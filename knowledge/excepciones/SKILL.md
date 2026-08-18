@@ -1,9 +1,9 @@
 ---
 name: excepciones
-description: Jerarquia de excepciones custom por dominio KLAP BYSF: XxxException, XxxClientException, XxxPersistenceException, NonRetryableClientDataException. Usar al crear o manejar excepciones de dominio.
+description: Jerarquia de excepciones custom por dominio KLAP SVA: XxxException, XxxClientException, XxxPersistenceException, NonRetryableClientDataException. Usar al crear o manejar excepciones de dominio.
 ---
 
-# Excepciones — KLAP BYSF
+# Excepciones — KLAP SVA
 
 Router de la jerarquia de excepciones custom del dominio. Naming de clases: ver
 [naming](../klap-standard/references/naming.md). DO/DONT generales del
@@ -12,7 +12,7 @@ proyecto: ver [reglas-do](../klap-standard/references/reglas-do.md) y
 
 ## Cuando usar este skill
 
-Al crear o manejar excepciones en un dominio KLAP BYSF: services,
+Al crear o manejar excepciones en un dominio KLAP SVA: services,
 repositories, clientes HTTP, Kafka listeners.
 
 ## Jerarquia (resumen)

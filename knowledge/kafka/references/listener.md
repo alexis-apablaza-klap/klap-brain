@@ -19,11 +19,11 @@ Al implementar el consumer Kafka de un dominio. El listener es la puerta de entr
 ## Skeleton de código
 
 ```java
-package cl.klap.bysf.dominio.{nombre_dominio}.listener;
+package cl.klap.sva.dominio.{nombre_dominio}.listener;
 
-import cl.klap.bysf.dominio.{nombre_dominio}.exceptions.NonRetryableClientDataException;
-import cl.klap.bysf.dominio.{nombre_dominio}.model.{Xxx}InputDto;
-import cl.klap.bysf.dominio.{nombre_dominio}.services.{Xxx}Processor;
+import cl.klap.sva.dominio.{nombre_dominio}.exceptions.NonRetryableClientDataException;
+import cl.klap.sva.dominio.{nombre_dominio}.model.{Xxx}InputDto;
+import cl.klap.sva.dominio.{nombre_dominio}.services.{Xxx}Processor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -212,11 +212,11 @@ public class {Xxx}KafkaListener {
 ## Ejemplo completo — dominio Liquidación
 
 ```java
-package cl.klap.bysf.dominio.liquidacion.listener;
+package cl.klap.sva.dominio.liquidacion.listener;
 
-import cl.klap.bysf.dominio.liquidacion.exceptions.NonRetryableClientDataException;
-import cl.klap.bysf.dominio.liquidacion.model.LiquidacionInputDto;
-import cl.klap.bysf.dominio.liquidacion.services.LiquidacionProcessor;
+import cl.klap.sva.dominio.liquidacion.exceptions.NonRetryableClientDataException;
+import cl.klap.sva.dominio.liquidacion.model.LiquidacionInputDto;
+import cl.klap.sva.dominio.liquidacion.services.LiquidacionProcessor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;

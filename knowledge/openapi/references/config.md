@@ -48,7 +48,7 @@ springdoc:
 ## Template: OpenApiConfig.java
 
 ```java
-package com.klap.bysf.{dominio}.global.config;
+package cl.klap.sva.{dominio}.global.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
@@ -84,8 +84,8 @@ public class OpenApiConfig {
                         .description("API REST para {descripcion del dominio de negocio}. " +
                                 "Disponible solo en entornos local y develop.")
                         .contact(new Contact()
-                                .name("Equipo KLAP BYSF")
-                                .email("equipo-bysf@klap.com"))
+                                .name("Equipo KLAP SVA")
+                                .email("desarrollosva@klap.cl"))
                         .license(new License()
                                 .name("Internal — KLAP")
                                 .url("https://klap.com")));

@@ -7,7 +7,7 @@ Paginacion cursor-based: [paginacion.md](paginacion.md).
 ## `ConstantsQuery.java`
 
 ```java
-package cl.klap.bysf.{modulo}.{aplicacion}.dominio.{nombre_dominio};
+package cl.klap.sva.{modulo}.{aplicacion}.dominio.{nombre_dominio};
 
 /**
  * Constantes de queries SQL para el dominio {NombreDominio}.
@@ -71,11 +71,11 @@ public final class ConstantsQuery {
 ### `LiquidacionRepository.java`
 
 ```java
-package cl.klap.bysf.svbo.liquidacion.dominio.liquidacion;
+package cl.klap.sva.svbo.liquidacion.dominio.liquidacion;
 
-import cl.klap.bysf.svbo.liquidacion.dominio.liquidacion.exceptions.LiquidacionPersistenceException;
-import cl.klap.bysf.svbo.liquidacion.dominio.liquidacion.mapper.LiquidacionRowMapper;
-import cl.klap.bysf.svbo.liquidacion.dominio.liquidacion.model.Liquidacion;
+import cl.klap.sva.svbo.liquidacion.dominio.liquidacion.exceptions.LiquidacionPersistenceException;
+import cl.klap.sva.svbo.liquidacion.dominio.liquidacion.mapper.LiquidacionRowMapper;
+import cl.klap.sva.svbo.liquidacion.dominio.liquidacion.model.Liquidacion;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
@@ -171,9 +171,9 @@ public class LiquidacionRepository {
 ### `LiquidacionRowMapper.java` (en `mapper/`)
 
 ```java
-package cl.klap.bysf.svbo.liquidacion.dominio.liquidacion.mapper;
+package cl.klap.sva.svbo.liquidacion.dominio.liquidacion.mapper;
 
-import cl.klap.bysf.svbo.liquidacion.dominio.liquidacion.model.Liquidacion;
+import cl.klap.sva.svbo.liquidacion.dominio.liquidacion.model.Liquidacion;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
@@ -214,9 +214,9 @@ public class LiquidacionRowMapper implements RowMapper<Liquidacion> {
 ### `AuditoriaLiquidacionRepository.java`
 
 ```java
-package cl.klap.bysf.svbo.liquidacion.dominio.liquidacion;
+package cl.klap.sva.svbo.liquidacion.dominio.liquidacion;
 
-import cl.klap.bysf.svbo.liquidacion.dominio.liquidacion.exceptions.LiquidacionPersistenceException;
+import cl.klap.sva.svbo.liquidacion.dominio.liquidacion.exceptions.LiquidacionPersistenceException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
