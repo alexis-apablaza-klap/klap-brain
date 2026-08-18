@@ -32,9 +32,15 @@ function run(_args) {
 
   const orphans = findOrphanedMemoryRefs(graph, memoryIndex);
   if (orphans.length) {
-    lines.push(`## Memorias con referencias colgadas (${orphans.length})`);
-    lines.push('_Componentes o productos eliminados/renombrados desde que se escribio la memoria — corregir o borrar._');
-    for (const o of orphans) lines.push(`  - ${o.slug} (${o.file}): ${o.kind} "${o.ref}" no existe en topology.json/productos.yml`);
+    lines.push(`## Memorias invalidas (${orphans.length})`);
+    lines.push('_Sin ancla (product/components nunca declarado), o ancla a un componente/producto eliminado/renombrado — corregir o borrar._');
+    for (const o of orphans) {
+      if (o.kind === 'sin-ancla') {
+        lines.push(`  - ${o.slug} (${o.file}): sin product/components`);
+      } else {
+        lines.push(`  - ${o.slug} (${o.file}): ${o.kind} "${o.ref}" no existe en topology.json/productos.yml`);
+      }
+    }
     lines.push('');
   }
 
