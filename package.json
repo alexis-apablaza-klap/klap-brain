@@ -20,7 +20,7 @@
     "dedupe:check": "node src/ci/dedupe-check.js",
     "versions:check": "node src/ci/versions-check.js",
     "scan:check": "node src/ci/scan-check.js",
-    "ci": "npm run budget && npm run validate && npm run dedupe:check && npm run versions:check"
+    "ci": "npm run budget && npm run validate && npm run dedupe:check && npm run versions:check && npm run scan:check"
   },
   "dependencies": {},
   "keywords": [

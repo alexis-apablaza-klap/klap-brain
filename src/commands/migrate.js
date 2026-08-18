@@ -13,10 +13,13 @@
  *    skills versionados, no como memoria dinamica.
  *
  * 2) --clean-legacy limpia ~/.claude/skills/*.md sueltos (formato viejo,
- *    no descubrible por Claude Code), ~/.claude/commands/ completo (klap-brain
- *    no instala nada ahi -- ese directorio es integramente la huella del
- *    ecosistema anterior, que copiaba commands/+workflows/ recursivamente) y
- *    los artefactos muertos de ~/.claude/workflows/ (_v1, simulacion_*).
+ *    no descubrible por Claude Code), ~/.claude/commands/ completo y
+ *    ~/.claude/workflows/ completo (klap-brain no instala nada en ninguno de
+ *    los dos -- son integramente la huella del ecosistema anterior, que
+ *    copiaba commands/+workflows/ recursivamente. Barrer solo _v1/simulacion_*
+ *    en workflows/ dejaba vivos sdd-impl-spec.js/sdd-impl-spec-refactor.js:
+ *    aparecian como skills invocables con rutas rotas a ~/.claude/commands/,
+ *    que install.js nunca puebla).
  *    Dry-run por defecto: solo con --yes borra de verdad, porque toca
  *    ~/.claude compartido por todos los proyectos del dev, no solo este repo.
  */
@@ -98,12 +101,12 @@ function findLegacyClaudeArtifacts() {
   const legacyCommands = fs.existsSync(paths.CLAUDE_COMMANDS)
     ? fs.readdirSync(paths.CLAUDE_COMMANDS).map((f) => path.join(paths.CLAUDE_COMMANDS, f))
     : [];
-  const deadWorkflows = fs.existsSync(paths.CLAUDE_WORKFLOWS)
-    ? fs.readdirSync(paths.CLAUDE_WORKFLOWS)
-      .filter((f) => /_v1\.|^simulacion_/i.test(f))
-      .map((f) => path.join(paths.CLAUDE_WORKFLOWS, f))
+  // klap-brain tampoco escribe en ~/.claude/workflows/ -- se limpia completo,
+  // no solo los _v1/simulacion_* (ver comentario de cabecera).
+  const legacyWorkflows = fs.existsSync(paths.CLAUDE_WORKFLOWS)
+    ? fs.readdirSync(paths.CLAUDE_WORKFLOWS).map((f) => path.join(paths.CLAUDE_WORKFLOWS, f))
     : [];
-  return [...flatSkills, ...legacyCommands, ...deadWorkflows];
+  return [...flatSkills, ...legacyCommands, ...legacyWorkflows];
 }
 
 function run(args) {

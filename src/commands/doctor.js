@@ -47,6 +47,15 @@ function run(_args) {
     legacyCommands.length ? `${legacyCommands.length} entrada(s) (klap-brain no instala nada ahi) — correr "klap migrate --clean-legacy"` : null,
   );
 
+  const legacyWorkflows = fs.existsSync(paths.CLAUDE_WORKFLOWS)
+    ? fs.readdirSync(paths.CLAUDE_WORKFLOWS)
+    : [];
+  check(
+    '~/.claude/workflows/ sin huella del ecosistema anterior',
+    legacyWorkflows.length === 0,
+    legacyWorkflows.length ? `${legacyWorkflows.length} entrada(s) (klap-brain no instala nada ahi) — correr "klap migrate --clean-legacy"` : null,
+  );
+
   console.log(issues === 0 ? '\nTodo en orden.' : `\n${issues} item(s) pendiente(s) — ver arriba.`);
   return !hardFail;
 }
