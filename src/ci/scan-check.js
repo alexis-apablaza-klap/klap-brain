@@ -1,22 +1,40 @@
 'use strict';
 
 /**
- * Gate de drift: compara topology/topology.json contra un re-scan en vivo
- * del config-server. Requiere acceso local al repo de properties (privado,
- * no vendoreado en klap-brain) -- si no esta disponible (tipicamente en CI
- * remoto) el check se salta explicitamente en vez de fallar en falso.
+ * Gate de drift: compara topology/topology.json (componentes con
+ * source=repo-docs-properties) contra un re-scan en vivo de los repos SVA
+ * locales -- lee `docs/*.properties` DENTRO de cada repo, no el
+ * config-server compartido completo.
+ *
+ * Decision 2026-08-18: el config-server compartido tiene 200+ componentes
+ * de otros equipos que cambian a diario -- escanearlo "a cada rato" traia
+ * ruido ajeno constante. El config-server sigue siendo la fuente real para
+ * que un servicio levante (eso no cambia), pero para *topologia* la fuente
+ * pasa a ser la copia en `docs/` de cada repo SVA, mantenida a mano por
+ * quien toca el config-server para ese componente.
+ *
+ * Requiere acceso local a los repos (--repos-dir=<path> o KLAP_REPOS_DIR)
+ * -- sin eso se omite, mismo patron que versions-check. Mientras ningun
+ * repo real tenga `docs/*.properties` todavia, este gate no encuentra
+ * nada que comparar y pasa en verde sin mas (no es una falla).
  */
 
 const fs = require('fs');
+const path = require('path');
 const paths = require('../lib/paths');
-const springConfigServer = require('../adapters/spring-config-server');
+const { findGitRepos } = require('../commands/scan');
+const propertiesDocs = require('../adapters/spring-properties-docs');
+
+function parseArgs(args) {
+  const reposDirArg = args.find((a) => a.startsWith('--repos-dir='));
+  const reposDir = (reposDirArg && reposDirArg.split('=')[1]) || process.env.KLAP_REPOS_DIR;
+  return { reposDir };
+}
 
 function run(args = []) {
-  const sourceArg = args.find((a) => a.startsWith('--source='));
-  const source = (sourceArg && sourceArg.split('=')[1]) || process.env.KLAP_CONFIG_SERVER;
-
-  if (!source || !fs.existsSync(source)) {
-    console.log('scan-check: sin acceso local al config-server (--source=<path> o KLAP_CONFIG_SERVER) — se omite, no es una falla.');
+  const { reposDir } = parseArgs(args);
+  if (!reposDir || !fs.existsSync(reposDir)) {
+    console.log('scan-check: sin acceso local a los repos (--repos-dir=<path> o KLAP_REPOS_DIR) — se omite, no es una falla.');
     return true;
   }
   if (!fs.existsSync(paths.TOPOLOGY_JSON)) {
@@ -25,21 +43,27 @@ function run(args = []) {
   }
 
   const committed = JSON.parse(fs.readFileSync(paths.TOPOLOGY_JSON, 'utf8'));
-  const committedFromSource = (committed.components || []).filter((c) => c.source === 'spring-config-server');
-  const { components: fresh } = springConfigServer.scan(source);
+  const committedFromDocs = (committed.components || []).filter((c) => c.source === 'repo-docs-properties');
 
-  const committedIds = new Set(committedFromSource.map((c) => c.id));
+  const repos = findGitRepos(reposDir);
+  const fresh = [];
+  for (const repoPath of repos) {
+    const { components } = propertiesDocs.scan(repoPath);
+    fresh.push(...components);
+  }
+
+  const committedIds = new Set(committedFromDocs.map((c) => c.id));
   const freshIds = new Set(fresh.map((c) => c.id));
   const missing = [...freshIds].filter((id) => !committedIds.has(id));
   const stale = [...committedIds].filter((id) => !freshIds.has(id));
 
-  console.log(`Componentes en topology.json (source=spring-config-server): ${committedIds.size}`);
-  console.log(`Componentes en el config-server real: ${freshIds.size}`);
+  console.log(`Repos escaneados: ${repos.length}  ·  con docs/*.properties: ${fresh.length}`);
+  console.log(`Componentes en topology.json (source=repo-docs-properties): ${committedIds.size}`);
 
   if (missing.length || stale.length) {
-    console.error('\nFALLAS: topology.json esta desfasado — correr "klap scan" de nuevo.');
-    if (missing.length) console.error(`  Faltan (nuevos en el config-server): ${missing.slice(0, 10).join(', ')}${missing.length > 10 ? ` (+${missing.length - 10})` : ''}`);
-    if (stale.length) console.error(`  Sobran (ya no existen en el config-server): ${stale.slice(0, 10).join(', ')}${stale.length > 10 ? ` (+${stale.length - 10})` : ''}`);
+    console.error('\nFALLAS: topology.json esta desfasado — correr "klap scan --repos-dir <...>" de nuevo.');
+    if (missing.length) console.error(`  Faltan (nuevos, con docs/ pero no committeados): ${missing.join(', ')}`);
+    if (stale.length) console.error(`  Sobran (committeados pero ya sin docs/*.properties): ${stale.join(', ')}`);
     process.exitCode = 1;
     return false;
   }

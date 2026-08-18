@@ -6,6 +6,7 @@ const { writeJson, readJson } = require('../lib/fs-utils');
 const paths = require('../lib/paths');
 
 const springConfigServer = require('../adapters/spring-config-server');
+const springPropertiesDocs = require('../adapters/spring-properties-docs');
 const springEcs = require('../adapters/spring-ecs');
 const lambda = require('../adapters/lambda');
 const angularMfe = require('../adapters/angular-mfe');
@@ -47,6 +48,10 @@ function findGitRepos(rootDir, maxDepth = 2) {
 }
 
 function detectAdapter(repoPath) {
+  if (fs.existsSync(path.join(repoPath, 'docs')) &&
+    fs.readdirSync(path.join(repoPath, 'docs')).some((f) => f.endsWith('.properties'))) {
+    return springPropertiesDocs;
+  }
   if (fs.existsSync(path.join(repoPath, 'src', 'environments'))) return angularMfe;
   if (
     fs.existsSync(path.join(repoPath, 'serverless.yml')) ||

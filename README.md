@@ -1,6 +1,6 @@
 # klap-brain
 
-Ecosistema de contexto compartido para el equipo KLAP BYSF. Rediseño de
+Ecosistema de contexto compartido para el equipo KLAP SVA. Rediseño de
 `eco-team-brain`: mismo objetivo (memoria de equipo + estándares + skills
 sobre Claude Code), arquitectura distinta — pensada para que el costo en
 tokens de una sesión de planificación baje ~80% y las contradicciones entre
@@ -57,7 +57,7 @@ actualizaciones del **código** del CLI a quien no quiera clonar.
 ## Uso diario
 
 ```bash
-klap scan --config-server <ruta-al-repo-de-properties> --repos-dir <ruta-a-klap-workspace>
+klap scan --repos-dir <ruta-a-klap-workspace>   # dia a dia: solo repos SVA locales
 klap ctx abono-ya                 # ficha de contexto + huecos de conocimiento
 klap impact bysf-liqsvbo-notificacion   # blast radius de un topic o componente
 klap remember --type decision --product abono-ya --components ms-xxx "el hecho"
@@ -65,11 +65,18 @@ klap review                       # curación periódica: todos los huecos de un
 klap install                      # skills reales en ~/.claude/skills + CLAUDE.md
 ```
 
+`klap scan --config-server <ruta-al-repo-de-properties>` (el mega-repo
+compartido con ~200+ componentes de otros equipos) queda para uso
+**excepcional** — onboarding de un componente nuevo, o auditar que la copia
+en `docs/` de un repo SVA sigue igual al config-server real. No es parte
+del flujo diario ni de `npm run ci`: ver "Convención `docs/*.properties`"
+más abajo.
+
 ## Comandos
 
 | Comando | Qué hace |
 |---|---|
-| `scan` | Deriva `topology/topology.json` desde el config-server + repos locales |
+| `scan` | Deriva `topology/topology.json` desde repos SVA locales (`docs/*.properties`, `--repos-dir`) + opcionalmente el config-server compartido (`--config-server`, uso excepcional) |
 | `ctx <producto\|componente>` | Ficha calculada: componentes, topics, integraciones, memoria, huecos |
 | `impact <topic\|componente>` | Blast radius |
 | `map` | Regenera `topology/MAP.md` (vista humana) |
@@ -82,19 +89,55 @@ klap install                      # skills reales en ~/.claude/skills + CLAUDE.m
 | `config show\|set\|reset` | Conexión a Neo4j |
 | `trivy` / `depcheck` / `cve-update` | Tooling de seguridad para el skill `auditoria` |
 
+## Convención `docs/*.properties` en repos SVA
+
+Decisión 2026-08-18: el config-server compartido (`ms-central-config-server-repo`)
+tiene 200+ componentes de varios equipos y cambia a diario — escanearlo
+completo "a cada rato" para derivar topología traía ruido ajeno constante.
+Sigue siendo **obligatorio** para que un servicio levante (Spring Cloud
+Config lo necesita ahí) — eso no cambia. Lo que cambia es la fuente para
+**topología**: cada repo SVA (`ms-`/`mcs-`) mantiene su propia copia de sus
+`.properties` (todos los ambientes) bajo `docs/` dentro del repo mismo —
+calcada de lo que existe en el config-server para ese componente.
+
+```
+ms-central-sva-anticipo-limites/
+└─ docs/
+   ├─ ms-central-sva-anticipo-limites.properties
+   ├─ ms-central-sva-anticipo-limites-local.properties
+   ├─ ms-central-sva-anticipo-limites-develop.properties
+   ├─ ms-central-sva-anticipo-limites-qa.properties
+   └─ ms-central-sva-anticipo-limites-master.properties
+```
+
+`klap scan --repos-dir <...>` detecta `docs/*.properties` automáticamente
+(adaptador `src/adapters/spring-properties-docs.js`, mismo parser que
+`spring-config-server.js`) y produce componentes con
+`source: repo-docs-properties`. `npm run scan:check` compara eso contra
+`topology.json` — ya no compara contra el mega-repo compartido. Cuando se
+actualiza un `.properties` en el config-server para un componente SVA, hay
+que copiar el cambio a `docs/` en el repo — es un paso manual nuevo, sin
+gate propio todavía (queda anotado como pendiente en `traspaso.md` §4.3).
+
 ## Desarrollo
 
 ```bash
 npm test              # node --test
-npm run ci            # los 4 gates: budget, validate, dedupe-check, versions-check
+npm run ci            # los 5 gates: budget, validate, no-duplicate-check, versions-check, scan-check
 ```
 
 Los gates de CI son el mecanismo anti-regresión: sin ellos el corpus vuelve a
 crecer sin control. `npm run budget` limita tamaño de `SKILL.md`/description;
-`npm run validate` exige que toda memoria apunte a un producto/componente que
-existe; `npm run dedupe:check` falla si una regla global se repite en más de
-un skill; `npm run versions:check` falla si dos skills declaran versiones
-distintas de la misma librería.
+`npm run validate` exige que toda memoria declare un ancla (producto/componente)
+que exista; `npm run no-duplicate:check` falla si una regla global se repite en
+más de un skill; `npm run versions:check` escanea repos reales
+(`build.gradle`/`package.json`) y falla si alguno esta por debajo del piso
+obligatorio declarado en `knowledge/klap-standard/references/stack.yml`
+(se omite sin `--repos-dir`/`KLAP_REPOS_DIR` local); `npm run scan:check`
+falla si `topology.json` está desfasado de `docs/*.properties` en los repos
+SVA locales (ver "Convención `docs/*.properties`" más arriba — ya no
+compara contra el config-server compartido completo; se omite sin
+`--repos-dir`/`KLAP_REPOS_DIR` local).
 
 ## Estructura
 

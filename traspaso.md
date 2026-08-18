@@ -67,7 +67,7 @@ incluye `lambda`), `klap doctor` sin pendientes salvo `~/.klap/config.json`.
 `klap-brain` es el rediseño de `eco-team-brain` (repo hermano en
 `C:\klap-workspace\eco-team-brain`, que queda intacto en disco pero
 desenlazado — ver sección 3). Mismo objetivo — memoria compartida del
-equipo KLAP BYSF sobre Claude Code — arquitectura distinta en 3 capas:
+equipo KLAP SVA sobre Claude Code — arquitectura distinta en 3 capas:
 
 1. **Topología derivada** (`topology/topology.json`, `productos.yml`) — se
    regenera con `klap scan`, nunca se edita a mano salvo `productos.yml`.
@@ -140,7 +140,8 @@ openapi, processor, microfrontend, auditoria, web-artifacts-builder, sdd),
    de diagrama se dibujaba siempre aunque el JSON trajera una imagen real.
 4. **`code-review-expert`** — migrado como skill delgada que referencia
    `klap-standard`/`testing` en vez de repetir reglas (evita el gate
-   `dedupe-check`). El original tenía 4 contradicciones con decisiones ya
+   `no-duplicate-check`, renombrado desde `dedupe-check` en la auditoría
+   2026-08-18). El original tenía 4 contradicciones con decisiones ya
    resueltas: cobertura 90% vs 95%, permitía ORM, Testcontainers/WireMock
    vs MockWebServer, sugería Redis.
 5. **`release-publish`** — reescrito para el scope/repo de klap-brain, con
@@ -284,6 +285,139 @@ actualizando rutas a `~/.claude/skills/`, sacando `design_patterns`, y
 alineando a `NonRetryableClientDataException`. Es trabajo de desarrollo
 real, no una migración de contenido.
 
+### 4.3 Regenerar `topology.json` desde cero, acotado a SVA
+
+**Qué es:** el grafo actual (225 componentes, generado 2026-08-13, ya con
+5+ días de drift) mezcla componentes de dominio `bysf` — de otro equipo
+(BYSF/SSFF, no SVA), que este equipo usa muy rara vez — con los propios.
+Decisión tomada en la auditoría del 2026-08-18: descartar el grafo completo
+y re-escanear sin mantener en scope los componentes del otro equipo.
+
+**Criterio de scope, definido en la auditoría del 2026-08-18:** el equipo
+SVA trabaja solo con componentes de **tipo `ms`, `mcs`, `lbd` o `mcf`**,
+bajo los 4 productos de `productos.yml` (Abono Ya, Impulso Klap, Cuota
+Comercio, Vouchering Itaú). Tipos como `bff`, `cnsr`, `srv`, `monoapp` o
+componentes de dominio `bysf` observados en el grafo actual pertenecen a
+otro equipo (BYSF/SSFF) y no deben quedar en scope.
+
+**Resuelto en la misma auditoría (2026-08-18) — ya no hace falta filtrar
+post-hoc:** en vez de escanear el config-server compartido completo (200+
+componentes de otros equipos, cambia a diario) y filtrar después, `klap
+scan --repos-dir` ahora lee `docs/*.properties` **dentro de cada repo SVA**
+(adaptador nuevo `src/adapters/spring-properties-docs.js`, gate `scan-check`
+reescrito para comparar contra esto — ver README "Convención
+`docs/*.properties`"). El scope queda acotado por construcción: si un repo
+no está clonado localmente bajo `klap-workspace` con su `docs/` poblado, ni
+se escanea, ni entra al grafo. El escaneo del config-server compartido
+(`--config-server`) sigue existiendo pero pasa a ser excepcional (onboarding
+de un componente nuevo / auditar que `docs/` no quedó desfasado del
+config-server real), no parte de `npm run ci`.
+
+**Hallazgo real durante esta misma sesión:** `ABONO-YA/ms-central-sva-anticipo-limites/docs/`
+**ya tiene** los 4 `.properties` por ambiente copiados — no se creó en esta
+sesión, ya existía. Es el primer repo listo para este flujo.
+
+**Por qué esta regeneración sigue pendiente:** falta que el equipo copie
+`docs/*.properties` en el resto de los repos SVA (`scan-check` hoy no
+encuentra nada para comparar en la mayoría — ver `npm run scan:check`
+localmente para el detalle exacto de qué falta). Recién ahí tiene sentido
+borrar `topology.json` y regenerarlo de cero: hacerlo antes solo
+reproduciría el mismo grafo mezclado con `bysf`, porque `--config-server`
+seguiria siendo la unica fuente disponible.
+
+**Impacto de dejarlo sin hacer:** `klap ctx`/`klap impact` siguen
+devolviendo componentes irrelevantes para el equipo real, sobre un grafo
+desactualizado.
+
+**Para cerrarlo:** (1) copiar `docs/*.properties` en cada repo SVA que
+todavía no lo tenga (trabajo en los repos reales, fuera de `klap-brain`),
+(2) borrar `topology/topology.json` actual, (3) `klap scan --repos-dir
+C:\klap-workspace` (ya no se necesita `--config-server` para esto), (4)
+revisar el diff completo antes de commitear, (5) correr `klap map`
+inmediatamente después para regenerar `topology/MAP.md` desde el grafo
+nuevo — quedó pendiente de revisión en la auditoría del 2026-08-18
+precisamente porque su contenido actual va a quedar obsoleto por este mismo
+punto.
+
+### 4.4 Registrar `contable`/`mc_tlog` como componentes transversales
+
+> **Prioridad subida (auditoria 2026-08-18):** `npm run validate` ahora
+> exige ancla real en todo hecho de `memory/` (ver `src/model/integrity.js`
+> — decisión "exigir ancla" de esta misma auditoría). Antes esto era
+> deseable; ahora es **bloqueante**: sin cerrar este punto, ninguna decisión
+> sobre `contable`/`mc_tlog` puede guardarse con `klap remember` sin romper
+> CI.
+
+**Qué es:** los repos de bases de datos `contable` y `mc_tlog` (donde se
+ejecutan los `.sql` generados por los productos) no están modelados en la
+topología. Decisión tomada en la auditoría del 2026-08-18: NO escanearlos
+como componentes reales — son demasiado grandes y no tienen historial de
+cambios completo — pero sí dejar constancia de que existen y son
+transversales a todos los productos (junto con el repo de Properties, que
+sí queda modelado como fuente de datos, no como componente propio — sin
+cambios ahí).
+
+**Por qué no está hecho todavía:** falta decidir el mecanismo de anclaje.
+`klap remember` hoy exige apuntar a un producto/componente que EXISTE en
+`topology.json` (gate `validate`) — si `contable`/`mc_tlog` no se modelan
+en ningún lado, no hay ancla real todavía y no se puede guardar el hecho
+sin inventarla.
+
+**Impacto de dejarlo sin hacer:** ningún dev nuevo se entera, leyendo el
+repo, de que estas dos BD son transversales ni de por qué se excluyeron
+del scan — la decisión solo vive en esta conversación.
+
+**Para cerrarlo:** decidir si el anclaje es (a) una entrada manual nueva en
+`productos.yml` (sin `componentPatterns`, solo referencia) o (b) un tipo de
+nodo "transversal" nuevo en el modelo de topología: luego correr `klap
+remember` una vez exista la ancla.
+
+### 4.5 Reducir el tamaño del corpus de `knowledge/`
+
+**Qué es:** el techo de `npm run budget` (400 KB) sigue vigente — no se
+toca — pero el uso actual (359 KB / 400 KB, 90% del techo) es demasiado
+alto y hay que bajarlo. Decisión tomada en la auditoría del 2026-08-18.
+
+**Desglose por skill (`knowledge/`, 355 KB de los 359 KB totales — el resto
+es `memory/`+`templates/`), de mayor a menor:**
+
+| KB | Skill |
+|---|---|
+| 59.2 | `sdd` |
+| 59.0 | `kafka` |
+| 38.3 | `gobierno` |
+| 29.5 | `microfrontend` |
+| 27.1 | `processor` |
+| 19.7 | `auditoria` |
+| 18.8 | `persistencia` |
+| 17.6 | `testing` |
+| 16.2 | `web-artifacts-builder` |
+| 15.2 | `klap-standard` |
+| 12.8 | `excepciones` |
+| 11.9 | `http-cliente` |
+| 11.4 | `kafka-audit` |
+| 5.7 | `openapi` |
+| 4.3 | `release-publish` |
+| 4.3 | `lambda` |
+| 3.9 | `code-review-expert` |
+
+`sdd` y `kafka` juntos ya son un tercio del corpus completo — son los
+primeros candidatos a revisar (progressive disclosure real: ¿todo lo que
+está en `SKILL.md`/`references/` se lee siempre, o hay contenido que
+debería vivir más profundo/cargarse menos seguido?).
+
+**Por qué no está hecho todavía:** falta decidir un target concreto (¿300
+KB? ¿250 KB?) y, sobre todo, *qué* recortar de cada skill sin perder
+contenido real — no es borrar por borrar.
+
+**Impacto de dejarlo sin hacer:** cada skill nueva que se agregue empuja el
+corpus más cerca del techo de 400 KB; sin margen, `npm run budget` empieza
+a fallar en CI para cambios que no tienen relación con el tamaño.
+
+**Para cerrarlo:** revisar `sdd` y `kafka` primero (mayor tamaño individual)
+por contenido redundante o movible a `references/` menos frecuentes;
+definir un target numérico; volver a medir con `npm run budget`.
+
 ---
 
 ## 5. Plan original completo (referencia histórica)
@@ -298,7 +432,7 @@ real, no una migración de contenido.
 
 ## Context
 
-`eco-team-brain` instala el ecosistema de contexto compartido de KLAP BYSF sobre Claude Code: Neo4j en Docker + MCP de memoria + 73 archivos markdown de conocimiento + un CLI de 19 comandos sobre ~5.300 líneas de shell. Entrega valor real (SDD de 5 fases, `/auditoria` que predice los gates de Jenkins, templates del estándar KLAP), pero la implementación tiene tres fallas estructurales medidas:
+`eco-team-brain` instala el ecosistema de contexto compartido de KLAP SVA sobre Claude Code: Neo4j en Docker + MCP de memoria + 73 archivos markdown de conocimiento + un CLI de 19 comandos sobre ~5.300 líneas de shell. Entrega valor real (SDD de 5 fases, `/auditoria` que predice los gates de Jenkins, templates del estándar KLAP), pero la implementación tiene tres fallas estructurales medidas:
 
 **1. Costo en tokens desproporcionado.** `1.156.628 B ≈ 289k tokens` instalados en `~/.claude`. `/fase-spec` Fase 2 obliga a leer `design_patterns/skill.md` (90.560 B ≈ 22,6k tokens) *siempre*, más 6-12 skills de su tabla → **~56-62k tokens antes de proponer una sola clase**. Cero progressive disclosure: un `SKILL.md` de 2.333 líneas se lee completo para responder sobre un patrón.
 
@@ -439,7 +573,7 @@ Sin esto el repo vuelve a 1,1 MB en dos trimestres.
 | `npm run budget` | `description` > 200 chars · `SKILL.md` > 200 L · corpus total sobre el techo |
 | `npm run validate` | Referencia colgada: `memory/*.md` que apunta a un componente inexistente en `topology.json` |
 | `npm run scan:check` | `topology.json` desfasado del config-server (drift) |
-| `npm run dedupe:check` | Una regla global (JavaDoc, `enable.metrics.push`, cobertura 95%) aparece en más de un cuerpo de skill |
+| `npm run no-duplicate:check` | Una regla global (JavaDoc, `enable.metrics.push`, cobertura 95%) aparece en más de un cuerpo de skill |
 | `npm run versions:check` | Una versión del stack declarada en dos lugares con valores distintos (hoy: 3.5.11 vs 3.5.14) |
 
 ---
